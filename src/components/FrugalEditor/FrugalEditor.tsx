@@ -4,7 +4,11 @@ import './FrugalEditor.css';
 
 
 export interface FrugalEditorProps {
-
+    onChange?: (d: any) => void;
+    getAllContent?: (d: any) => void;
+    getRef?: (e: Quill) => void;
+    debug?: boolean;
+    data?: any;
 }
 
 export interface FrugalEditorState {
@@ -29,13 +33,20 @@ export class FrugalEditor extends React.PureComponent<FrugalEditorProps, FrugalE
     componentDidMount(): void {
         this.setEditorOptions();
         this.editor = new Quill(document.getElementById('editor-content') as Element, this.editorOptions);
+        this.setEventHandlers();
     }
 
-    setEditorOptions = () => {
+    setEventHandlers = (): void => {
+        if (this.props.onChange)
+            this.editor?.on('text-change', this.props.onChange);
+        if (this.props.getRef)
+            this.props.getRef(this.editor as Quill);
+    };
 
+    setEditorOptions = (): void => {
         this.editorOptions = {
             placeholder: 'Enter your blog',
-            debug: true,
+            debug: this.props?.debug,
             theme: 'snow',
             modules: {
                 toolbar: {
@@ -43,8 +54,6 @@ export class FrugalEditor extends React.PureComponent<FrugalEditorProps, FrugalE
                 }
             }
         };
-
-
     };
 
     render() {
