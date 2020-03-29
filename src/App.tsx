@@ -1,16 +1,10 @@
 import React from 'react';
 import './App.css';
-import {FrugalEditor} from "./components/FrugalEditor/FrugalEditor";
+import {Login} from "./components/Login/Login";
 
 function App() {
-    let editor: any;
-
     return (
-        <div className="container">
-            <FrugalEditor getRef={(e: any) => {
-                editor = e;
-            }}/>
-        </div>
+        <Login/>
     );
 }
 
