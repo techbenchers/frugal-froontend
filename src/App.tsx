@@ -1,11 +1,14 @@
 import React from 'react';
 import './App.css';
-import {Login} from "./components/Login/Login";
+import {FrugalHeader} from "./components/FrugalHeader/FrugalHeader";
+import {withRouter} from "react-router-dom";
 
 function App() {
     return (
-        <Login/>
+        <>
+            <FrugalHeader/>
+        </>
     );
 }
 
-export default App;
+export default withRouter(App);

@@ -1,0 +1,19 @@
+h6.title {
+    flex-grow: 1;;
+}
+
+.MuiAppBar-root {
+    background-color: white !important;
+    color: black !important;
+}
+
+.search input {
+    border: 1px solid lightslategrey;
+    padding: 8px !important;
+    border-radius: 4px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}

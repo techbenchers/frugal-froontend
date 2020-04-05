@@ -9,6 +9,7 @@ export interface DialigProps {
     actions?: any;
     contentText?: boolean;
     children?: React.ReactNode;
+    onBackdropClick?: () => void;
 }
 
 
@@ -26,7 +27,8 @@ export class FrugalDialog extends React.PureComponent<DialigProps, DialogState> 
 
     render() {
         return (
-            <Dialog onClose={this.props.handleClose} aria-labelledby="dialog-title" open={this.props.open}>
+            <Dialog onBackdropClick={this.props.onBackdropClick} onClose={this.props.handleClose}
+                    aria-labelledby="dialog-title" open={this.props.open}>
                 {this.props.title && <DialogTitle id="dialog-title">{this.props.title}</DialogTitle>}
                 {this.props.children &&
 				<DialogContent>
