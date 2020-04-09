@@ -2,8 +2,8 @@ import React from 'react';
 import {Button} from "@material-ui/core";
 import {FrugalDialog} from "../FrugalDialog/FrugalDialog";
 import './Login.css';
-import google from '../../google.png';
-import github from '../../github.png';
+import google from '../../static/images/logo/google.png';
+import github from '../../static/images/logo/github.png';
 import {Redirect} from "react-router";
 
 export interface LoginProps {
