@@ -5,48 +5,64 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import './FrugalPostCard.css';
-import paella from '../../static/images/paella.jpeg';
 import {IconButton} from "@material-ui/core";
 import CardActions from "@material-ui/core/CardActions";
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 
+export interface FrugalPostCardProps {
+    img?: any;
+    alt?: string;
+    title?: string;
+    date?: any;
+    body?: string;
+    author?: string;
+}
 
-export default function MediaControlCard() {
-    return (
-        <Card className='root'>
-            <CardMedia
-                className='cover'
-                image={paella}
-                title="Live from space album cover"
-            />
-            <div className='details'>
-                <CardHeader
-                    id='header'
-                    title="Shrimp and Chorizo Paella"
-                    subheader="September 14, 2016"
+export interface FrugalPostCardState {
+
+}
+
+export class FrugalPostCard extends React.PureComponent<FrugalPostCardProps, FrugalPostCardState>{
+    constructor(props: FrugalPostCardProps) {
+        super(props);
+    }
+    render() {
+        // const {options} = this.props;
+        return (
+            <Card className='root'>
+                <CardMedia
+                    className='cover'
+                    image={this.props.img}
+                    title={this.props.alt}
                 />
-                <CardContent id='content'>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                        This impressive paella is a perfect party dish and a fun meal to cook together with your
-                        guests.
-                    </Typography>
-                </CardContent>
-                <CardActions disableSpacing id='action'>
-                    <Typography variant="caption" color="textSecondary" component="p">
-                        Aniket Singh
-                    </Typography>
-                    <div className='actionBtn'>
-                        <IconButton aria-label="add to favorites">
-                            <FavoriteIcon/>
-                        </IconButton>
-                        <IconButton aria-label="share">
-                            <ShareIcon/>
-                        </IconButton>
-                    </div>
-                </CardActions>
-            </div>
-        </Card>
-    );
+                <div className='details'>
+                    <CardHeader
+                        id='header'
+                        title={this.props.title}
+                        subheader={this.props.date}
+                    />
+                    <CardContent id='content'>
+                        <Typography variant="body2" color="textSecondary" component="p">
+                            {this.props.body}
+                        </Typography>
+                    </CardContent>
+                    <CardActions disableSpacing id='action'>
+                        <Typography variant="caption" color="textSecondary" component="p">
+                            {this.props.author}
+                        </Typography>
+                        <div className='actionBtn'>
+                            <IconButton aria-label="add to favorites">
+                                <FavoriteIcon/>
+                            </IconButton>
+                            <IconButton aria-label="share">
+                                <ShareIcon/>
+                            </IconButton>
+                        </div>
+                    </CardActions>
+                </div>
+            </Card>
+        );
+    }
 
 }
