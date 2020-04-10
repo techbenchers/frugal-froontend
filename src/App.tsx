@@ -6,7 +6,6 @@ import {withRouter} from "react-router-dom";
 import paella from "./static/images/paella.jpeg"
 import {FrugalPostCardProps} from "./components/FrugalPostCard/FrugalPostCard"
 import FrugalHome from "./components/FrugalHome/FrugalHome";
-import AutoGrid from "./components/FrugalHome/FrugalHome";
 
 const frugal: FrugalPostCardProps = {
     img: paella,
@@ -20,7 +19,7 @@ const frugal: FrugalPostCardProps = {
 function App() {
     return (
         <>
-            <AutoGrid/>
+            <FrugalHome/>
         </>
     );
 }
