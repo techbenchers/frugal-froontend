@@ -69,3 +69,7 @@
 .actionBtn {
     margin-left: auto;
 }
+
+.MuiBox-root {
+    padding: 1rem;
+}
