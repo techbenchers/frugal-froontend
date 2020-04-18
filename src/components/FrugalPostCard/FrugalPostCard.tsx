@@ -24,35 +24,45 @@ export interface FrugalPostCardState {
 
 }
 
-export class FrugalPostCard extends React.PureComponent<FrugalPostCardProps, FrugalPostCardState>{
-    constructor(props: FrugalPostCardProps) {
-        super(props);
-    }
+export class FrugalPostCard extends React.PureComponent<FrugalPostCardProps, FrugalPostCardState> {
+
+
     render() {
-        // const {options} = this.props;
         return (
             <Box width="100%">
                 <Card className='root'>
-                    <CardMedia
-                        className='cover'
-                        image={this.props.img}
-                        title={this.props.alt}
-                    />
+                    {
+                        this.props.img &&
+						<CardMedia
+							className='cover'
+							image={this.props.img}
+							title={this.props.alt}
+						/>
+                    }
                     <div className='details'>
-                        <CardHeader
-                            id='header'
-                            title={this.props.title}
-                            subheader={this.props.date}
-                        />
-                        <CardContent id='content'>
-                            <Typography variant="body2" color="textSecondary" component="p">
-                                {this.props.body}
-                            </Typography>
-                        </CardContent>
+                        {
+                            this.props.title &&
+							<CardHeader
+								id='header'
+								title={this.props.title}
+								subheader={this.props.date}
+							/>
+                        }
+                        {
+                            this.props.body &&
+							<CardContent id='content'>
+								<Typography variant="body2" color="textSecondary" component="p">
+                                    {this.props.body}
+								</Typography>
+							</CardContent>
+                        }
                         <CardActions disableSpacing id='action'>
-                            <Typography variant="caption" color="textSecondary" component="p">
-                                {this.props.author}
-                            </Typography>
+                            {
+                                this.props.author &&
+								<Typography variant="caption" color="textSecondary" component="p">
+                                    {this.props.author}
+								</Typography>
+                            }
                             <div className='actionBtn'>
                                 <IconButton aria-label="add to favorites">
                                     <FavoriteIcon/>
