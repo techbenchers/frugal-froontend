@@ -4,17 +4,17 @@ import {FrugalDialog} from "../FrugalDialog/FrugalDialog";
 import './Login.css';
 import google from '../../static/images/logo/google.png';
 import github from '../../static/images/logo/github.png';
-import {Redirect} from "react-router";
+import {Redirect, RouteComponentProps, withRouter} from "react-router";
 
-export interface LoginProps {
+export interface LoginProps extends RouteComponentProps {
 }
 
 export interface LoginState {
-    open?: boolean;
+    open: boolean;
 }
 
 
-export default class Login extends React.PureComponent<LoginProps, LoginState> {
+class Login extends React.PureComponent<LoginProps, LoginState> {
 
     constructor(props: LoginProps) {
         super(props);
@@ -24,14 +24,15 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
     }
 
 
-    onBackdropClick = () => {
-        this.setState({open: false});
+    onBackdropClick = (e: any) => {
+        e.stopPropagation();
+        this.props.history.goBack();
     };
 
     render() {
         return (
             <>
-                <FrugalDialog onBackdropClick={this.onBackdropClick} title={'Sign In'} open={this.state.open || false}>
+                <FrugalDialog onBackdropClick={this.onBackdropClick} title={'Sign In'} open={this.state.open}>
                     <div className='button-container'>
                         <Button startIcon={<img src={google} alt='Google logo'/>} variant='outlined'>Login with
                             Google</Button>
@@ -44,3 +45,5 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
         )
     }
 }
+
+export default withRouter(Login);

@@ -1,9 +1,7 @@
-import React, {Suspense} from 'react';
-import {Route, RouteComponentProps, Switch, withRouter} from "react-router";
+import React from 'react';
 import './FrugalMainScreen.css';
-
-const FrugalHome = React.lazy(() => import('../FrugalHome/FrugalHome'));
-const FrugalBlogDisplayContainer = React.lazy(() => import('../FrugalBlogDisplay/FrugalBlogDisplay'));
+import FrugalHome from "../FrugalHome/FrugalHome";
+import {FrugalHeader} from "../FrugalHeader/FrugalHeader";
 
 
 export interface FrugalMainScreenProps {
@@ -21,12 +19,10 @@ export default class FrugalMainScreen extends React.Component<FrugalMainScreenPr
     render() {
         console.log('main screen called');
         return (
-            <Switch>
-                <Suspense fallback={<div>Loading...</div>}>
-                    <Route exact path="/" children={<FrugalHome/>}/>
-                    <Route path="/:id" children={<FrugalBlogDisplayContainer/>}/>
-                </Suspense>
-            </Switch>
+            <>
+                <FrugalHeader/>
+                <FrugalHome/>
+            </>
         )
     }
 }

@@ -9,7 +9,7 @@ export interface DialigProps {
     actions?: any;
     contentText?: boolean;
     children?: React.ReactNode;
-    onBackdropClick?: () => void;
+    onBackdropClick?: (e: any) => void;
 }
 
 

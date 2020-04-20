@@ -5,6 +5,7 @@ import paella from "../../static/images/paella.jpeg";
 
 
 const frugal: FrugalPostCardProps = {
+    uri: "Shrimp-and-Chorizo-Paella-123",
     img: paella,
     alt: "paella",
     title: "Shrimp and Chorizo Paella",
@@ -22,7 +23,7 @@ export interface FrugalBlogContainerState {
 
 }
 
-export class FrugalBlogContainer extends React.Component<FrugalBlogContainerProps, FrugalBlogContainerState> {
+export default class FrugalBlogContainer extends React.Component<FrugalBlogContainerProps, FrugalBlogContainerState> {
     render() {
         return (
             <>

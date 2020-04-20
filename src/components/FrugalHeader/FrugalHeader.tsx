@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import InputBase from '@material-ui/core/InputBase';
 import './FrugalHeader.css';
-import {Link, Route} from "react-router-dom";
+import {Link, Route, useLocation} from "react-router-dom";
 import {FrugalMenu} from "../FrugalMenu/FrugalMenu";
 // import {Login} from "../Login/Login";
 
@@ -19,15 +19,20 @@ export interface FrugalHeaderState {
 
 }
 
+export const LoginButton = (props: any) => {
+    const location = useLocation();
+    return (
+        <Link to={{
+            pathname: "/login",
+            state: {background: location}
+        }}>
+            <Button color="inherit">Login</Button>
+        </Link>
+    );
+};
+
 export class FrugalHeader extends React.PureComponent<FrugalHeaderProps, FrugalHeaderState> {
 
-    LoginButton = () => {
-        return (
-            <Link to="/login">
-                <Button color="inherit">Login</Button>
-            </Link>
-        );
-    };
 
     UserProfile = () => {
 
@@ -51,19 +56,19 @@ export class FrugalHeader extends React.PureComponent<FrugalHeaderProps, FrugalH
     render() {
         return (
             <>
-                <AppBar position="static">
+                <AppBar position="sticky">
                     <Toolbar>
                         <Typography variant="h6" className="title">
                             Blogs
                         </Typography>
                         <InputBase className="search" placeholder="Search"/>
-                        {/*<this.LoginButton/>*/}
+                        <LoginButton/>
                         <this.UserProfile/>
                     </Toolbar>
                 </AppBar>
-                <React.Suspense fallback={<div>Loading...</div>}>
-                    <Route path="/login"><Login/></Route>
-                </React.Suspense>
+                {/*<React.Suspense fallback={<div>Loading...</div>}>*/}
+                {/*    <Route path="/login"><Login/></Route>*/}
+                {/*</React.Suspense>*/}
             </>
         )
     }
