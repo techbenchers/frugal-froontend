@@ -10,6 +10,7 @@ import CardActions from "@material-ui/core/CardActions";
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import Box from "@material-ui/core/Box";
+import {Link} from "react-router-dom";
 
 export interface FrugalPostCardProps {
     img?: any;
@@ -31,6 +32,7 @@ export class FrugalPostCard extends React.PureComponent<FrugalPostCardProps, Fru
         return (
             <Box width="100%">
                 <Card className='root'>
+                    <Link to="/qwe"/>
                     {
                         this.props.img &&
 						<CardMedia
