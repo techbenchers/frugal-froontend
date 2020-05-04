@@ -1,8 +1,16 @@
 .root {
     flex-grow: 1;
+    /*height: calc(100vh - 64px);*/
+    /*overflow-y: auto;*/
 }
 
 .paper {
     padding: 2px;
     text-align: center;
+}
+
+.new-post {
+    position: absolute !important;
+    bottom: 1rem;
+    right: 1rem;
 }

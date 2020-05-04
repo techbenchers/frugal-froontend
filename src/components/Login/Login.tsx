@@ -40,7 +40,6 @@ class Login extends React.PureComponent<LoginProps, LoginState> {
                             Github</Button>
                     </div>
                 </FrugalDialog>
-                {!this.state.open && <Redirect to="/"/>}
             </>
         )
     }
