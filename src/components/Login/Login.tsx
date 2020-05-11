@@ -1,10 +1,15 @@
 import React from 'react';
-import {Button} from "@material-ui/core";
+import {Button, Link} from "@material-ui/core";
 import {FrugalDialog} from "../FrugalDialog/FrugalDialog";
 import './Login.css';
 import google from '../../static/images/logo/google.png';
 import github from '../../static/images/logo/github.png';
-import {Redirect, RouteComponentProps, withRouter} from "react-router";
+import {RouteComponentProps, withRouter} from "react-router";
+
+const loginUrl = {
+    google: '/oauth2/authorization/google',
+    github: '/oauth2/authorization/github'
+};
 
 export interface LoginProps extends RouteComponentProps {
 }
@@ -34,10 +39,16 @@ class Login extends React.PureComponent<LoginProps, LoginState> {
             <>
                 <FrugalDialog onBackdropClick={this.onBackdropClick} title={'Sign In'} open={this.state.open}>
                     <div className='button-container'>
-                        <Button startIcon={<img src={google} alt='Google logo'/>} variant='outlined'>Login with
-                            Google</Button>
-                        <Button startIcon={<img src={github} alt='Github logo'/>} variant='outlined'>Login with
-                            Github</Button>
+                        <Link href={loginUrl.google}>
+                            <Button startIcon={<img src={google} alt='Google logo'/>} variant='outlined'>
+                                Login with Google
+                            </Button>
+                        </Link>
+                        <Link href={loginUrl.github}>
+                            <Button startIcon={<img src={github} alt='Github logo'/>} variant='outlined'>
+                                Login with Github
+                            </Button>
+                        </Link>
                     </div>
                 </FrugalDialog>
             </>

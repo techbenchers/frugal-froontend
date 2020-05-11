@@ -5,7 +5,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import './FrugalPostCard.css';
-import {ButtonBase, CardActionArea, IconButton} from "@material-ui/core";
+import {CardActionArea} from "@material-ui/core";
 import CardActions from "@material-ui/core/CardActions";
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
@@ -69,12 +69,12 @@ export class FrugalPostCard extends React.PureComponent<FrugalPostCardProps, Fru
 										</Typography>
                                     }
                                     <div className='actionBtn'>
-                                        <IconButton aria-label="add to favorites">
-                                            <FavoriteIcon/>
-                                        </IconButton>
-                                        <IconButton aria-label="share">
-                                            <ShareIcon/>
-                                        </IconButton>
+                                        {/*<IconButton aria-label="add to favorites">*/}
+                                        <FavoriteIcon/>
+                                        {/*</IconButton>*/}
+                                        {/*<IconButton aria-label="share">*/}
+                                        <ShareIcon/>
+                                        {/*</IconButton>*/}
                                     </div>
                                 </CardActions>
                             </div>
