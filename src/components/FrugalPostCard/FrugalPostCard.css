@@ -1,4 +1,4 @@
-/* Extra small devices (phones, 600px and down) */
+/* !*Extra small devices (phones, 600px and down)*!*/
 /*@media only screen and (max-width: 600px) {*/
 /*    .cover {*/
 /*        width: 100px;*/
@@ -39,7 +39,7 @@
     flex-direction: column;
 }
 
-#header  {
+#header {
     padding: 10px 16px;
 }
 
@@ -53,10 +53,24 @@
 }
 
 .cover {
-    width: 100%;
+    width: 160px;
     height: auto;
     margin: 10px;
 }
+
+@media screen and (max-width: 855px) {
+    .cover {
+        width: 234px;
+    }
+}
+
+@media screen and (max-width: 503px) {
+    .cover {
+        width: 110px;
+        height: 72px;
+    }
+}
+
 
 /*#shareBtn {*/
 /*    margin-left: auto;*/

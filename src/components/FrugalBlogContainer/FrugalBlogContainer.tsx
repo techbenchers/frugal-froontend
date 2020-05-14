@@ -3,9 +3,9 @@ import './FrugalBlogContainer.css';
 import {FrugalPostCard, FrugalPostCardProps} from "../FrugalPostCard/FrugalPostCard";
 import paella from "../../static/images/paella.jpeg";
 import {connect} from 'react-redux'
-import {MyBlogActions} from "../../store/actions";
-import {Blog, User} from "../../interface";
-import {HttpServiceUtil} from "../../service";
+import {MyBlogActions, MyUserActions} from "../../store/actions";
+// import {Blog} from "../../interface";
+import * as faker from 'faker';
 
 
 const frugal: FrugalPostCardProps = {
@@ -19,23 +19,22 @@ const frugal: FrugalPostCardProps = {
 };
 const list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-const blog: Blog = {
-    id: "qwe123",
-    titleImage: "",
-    title: "Avengers Assemble",
-    publishedAt: "",
-    updatedAt: "",
-    isPublished: false,
-    isAnonymous: false,
-    createdAt: "",
-    userId: "user123",
-    body: "loremmdasdashdahsdjkaksdhkasbvdiuabsdjhas da sd a sd a sdkasdasdkasd",
-    uri: "Avengers-Assemble-qwe123"
-};
+// const blog: Blog = {
+//     id: "qwe123",
+//     titleImage: "",
+//     title: "Avengers Assemble",
+//     publishedAt: "",
+//     updatedAt: "",
+//     isPublished: false,
+//     isAnonymous: false,
+//     createdAt: "",
+//     userId: "user123",
+//     body: "loremmdasdashdahsdjkaksdhkasbvdiuabsdjhas da sd a sd a sdkasdasdkasd",
+//     uri: "Avengers-Assemble-qwe123"
+// };
 
 export interface FrugalBlogContainerProps {
     dispatch: (e: any) => void;
-    getState?: () => any;
 }
 
 export interface FrugalBlogContainerState {
@@ -44,15 +43,11 @@ export interface FrugalBlogContainerState {
 
 class FrugalBlogContainer extends React.Component<FrugalBlogContainerProps, FrugalBlogContainerState> {
     componentDidMount() {
+        console.log("faker data ", faker.name.firstName());
         // Todo: remove below lines
-        this.props.dispatch(MyBlogActions.GetBlogSuccess(blog));
+        this.props.dispatch(MyBlogActions.LoadBlog(""));
+        this.props.dispatch(MyUserActions.GetUser(""));
         console.log("Frugal container props", this.props);
-
-        HttpServiceUtil.getData<User>("/user/info").then((r: User) => {
-            console.log("user info ", r);
-        }).catch((e: any) => {
-            console.log("error while fetching user", e.toString());
-        })
     }
 
     render() {

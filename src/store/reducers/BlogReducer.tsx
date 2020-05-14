@@ -1,5 +1,5 @@
-import {Action, BlogActionsTypes} from "../actions";
-import {Blog} from "../../interface";
+import { BlogActionsTypes} from "../actions";
+import {Blog, MyAction} from "../../interface";
 
 
 export interface BlogState {
@@ -8,7 +8,7 @@ export interface BlogState {
 
 const initState: BlogState = {};
 
-export const BlogReducer = (state: BlogState = initState, action: Action): BlogState => {
+export const BlogReducer = (state: BlogState = initState, action: MyAction<any>): BlogState => {
     console.log("sttore state ", state);
     switch (action.type) {
         case BlogActionsTypes.GetBlogSuccess:

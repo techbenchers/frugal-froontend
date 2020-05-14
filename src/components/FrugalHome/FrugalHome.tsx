@@ -2,7 +2,7 @@ import React, {Suspense} from 'react';
 import Grid from '@material-ui/core/Grid';
 import {Fab, Hidden} from "@material-ui/core";
 import {Route, RouteComponentProps, Switch, withRouter} from "react-router";
-import Login from "../Login/Login";
+import {default as FrugalLogin} from "../Login/Login";
 import './FrugalHome.css';
 import AddIcon from '@material-ui/icons/Add';
 import {Link} from "react-router-dom";
@@ -10,6 +10,8 @@ import {Link} from "react-router-dom";
 const FrugalBlogDisplay = React.lazy(() => import('../FrugalBlogDisplay/FrugalBlogDisplay'));
 const FrugalBlogContainer = React.lazy(() => import('../FrugalBlogContainer/FrugalBlogContainer'));
 const FrugalBlogEdit = React.lazy(() => import('../FrugalBlogEdit/FrugalBlogEdit'));
+
+// const FrugalLogin = React.lazy(() => import('../Login/Login'));
 
 export interface FrugalHomeProps extends RouteComponentProps {
 
@@ -41,7 +43,7 @@ class FrugalHome extends React.Component<FrugalHomeProps, FrugalHomeState> {
                                     <Route path="/blog/:id/edit" children={<FrugalBlogEdit/>}/>
                                     <Route path="/new" children={<FrugalBlogEdit/>}/>
                                 </Switch>
-                                <Route path="/login" children={<Login/>}/>
+                                <Route path="/login" children={<FrugalLogin/>}/>
                             </Suspense>
                         </Grid>
                     </Grid>
@@ -49,12 +51,12 @@ class FrugalHome extends React.Component<FrugalHomeProps, FrugalHomeState> {
                         <Grid item xs/>
                     </Hidden>
                 </Grid>
-                <Link to="/new">
+                {!this.props.location.pathname.includes("new") && (<Link to="/new">
                     <Fab className="new-post" variant="extended">
                         <AddIcon/>
                         New
                     </Fab>
-                </Link>
+                </Link>)}
             </div>
         );
     }

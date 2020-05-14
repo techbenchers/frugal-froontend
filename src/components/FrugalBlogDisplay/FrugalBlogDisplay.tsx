@@ -1,6 +1,6 @@
 import React from 'react';
 import './FrugalBlogDisplay.css';
-import {RouteComponentProps, useParams, withRouter} from "react-router";
+import {RouteComponentProps, withRouter} from "react-router";
 import {DeltaToHTML} from "../FrugalEditor/DeltaTToHTML";
 
 const post = {

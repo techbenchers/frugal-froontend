@@ -15,7 +15,6 @@ export class HttpServiceUtil {
 
     public static async getData<T>(endPoint: string): Promise<T> {
         try {
-            console.log("axios config ", config);
             let res = await axios.get<T>(prefixAPI + endPoint, config);
             return res.data as T;
         } catch (e) {

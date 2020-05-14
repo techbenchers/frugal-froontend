@@ -4,13 +4,19 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter} from "react-router-dom";
-import {combineReducers, createStore} from "redux";
+import {applyMiddleware, combineReducers, createStore} from "redux";
 import {BlogReducer, UserReducer} from "./store/reducers";
 import {Provider} from "react-redux";
+import createSagaMiddleware from 'redux-saga';
+import {rootSaga} from './store/saga';
+import {composeWithDevTools} from 'redux-devtools-extension';
 
 let rootReducer = combineReducers({blogs: BlogReducer, users: UserReducer});
 
-const store = createStore(rootReducer);
+const sagaMiddleware = createSagaMiddleware();
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaMiddleware)));
+
+sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
     <Provider store={store}>

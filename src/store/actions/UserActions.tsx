@@ -1,4 +1,4 @@
-import {User} from "../../interface";
+import {MyAction, User} from "../../interface";
 
 export enum UserActionsTypes {
     // Get user
@@ -9,20 +9,21 @@ export enum UserActionsTypes {
 
 export class MyUserActions {
 
-    public static GetBlog() {
+    public static GetUser(payload: string): MyAction<string> {
         return {
             type: UserActionsTypes.GetUser,
+            payload: payload,
         };
     }
 
-    public static GetBlogSuccess(payload: User) {
+    public static GetUserSuccess(payload: User): MyAction<User> {
         return {
             type: UserActionsTypes.GetUserSuccess,
             payload: payload
         };
     }
 
-    public static GetBlogFail(payload: string) {
+    public static GetUserFail(payload: string): MyAction<string> {
         return {
             type: UserActionsTypes.GetUserFail,
             payload: payload

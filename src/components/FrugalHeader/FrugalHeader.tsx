@@ -5,11 +5,9 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import InputBase from '@material-ui/core/InputBase';
 import './FrugalHeader.css';
-import {Link, Route, useLocation} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import {FrugalMenu} from "../FrugalMenu/FrugalMenu";
-// import {Login} from "../Login/Login";
 
-const Login = React.lazy(() => import('../Login/Login'));
 
 export interface FrugalHeaderProps {
 
@@ -59,16 +57,14 @@ export class FrugalHeader extends React.PureComponent<FrugalHeaderProps, FrugalH
                 <AppBar position="sticky">
                     <Toolbar>
                         <Typography variant="h6" className="title">
-                            Blogs
+                            <Link to="/">Blogs</Link>
+
                         </Typography>
                         <InputBase className="search" placeholder="Search"/>
                         <LoginButton/>
                         <this.UserProfile/>
                     </Toolbar>
                 </AppBar>
-                {/*<React.Suspense fallback={<div>Loading...</div>}>*/}
-                {/*    <Route path="/login"><Login/></Route>*/}
-                {/*</React.Suspense>*/}
             </>
         )
     }
