@@ -36,7 +36,7 @@ export class FrugalPostCard extends React.PureComponent<FrugalPostCardProps, Fru
             <Box width="100%">
                 <Link to={`/blog/${uri}`}>
                     <CardActionArea>
-                        <Card className='root'>
+                        <Card className='blog-root'>
                             {
                                 this.props.img &&
                                 <CardMedia
