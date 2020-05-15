@@ -1,5 +1,5 @@
 import React from 'react';
-import Quill, {QuillOptionsStatic} from 'quill';
+import Quill, { QuillOptionsStatic } from 'quill';
 import './FrugalEditor.css';
 
 
@@ -16,11 +16,11 @@ export interface FrugalEditorState {
 }
 
 const toolbarOptions = [
-    [{'size': ['small', false, 'large', 'huge']}],
-    [{'font': []}],
+    [{ 'size': ['small', false, 'large', 'huge'] }],
+    // [{'font': []}],
     ['bold', 'italic', 'underline'],
-    [{'list': 'ordered'}, {'list': 'bullet'}],
-    [{'align': []}],
+    [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+    [{ 'align': [] }],
     ['image', 'video', 'link'],
     ['blockquote', 'code-block'],
 ];
@@ -59,7 +59,7 @@ export class FrugalEditor extends React.PureComponent<FrugalEditorProps, FrugalE
     render() {
         return (
             <div id="editor">
-                <div id="editor-content"/>
+                <div id="editor-content" />
             </div>
         );
     }

@@ -1,16 +1,20 @@
 .root {
-    flex-grow: 1;
-    /*height: calc(100vh - 64px);*/
-    overflow: hidden;
+  flex-grow: 1;
+  overflow: hidden;
 }
 
 .paper {
-    padding: 2px;
-    text-align: center;
+  padding: 2px;
+  text-align: center;
 }
 
 .new-post {
-    position: fixed !important;
-    bottom: 1rem;
-    right: 1rem;
+  position: fixed !important;
+  bottom: 1rem;
+  right: 1rem;
+}
+
+.grid-container {
+  height: 100%;
+  overflow-y: auto;
 }

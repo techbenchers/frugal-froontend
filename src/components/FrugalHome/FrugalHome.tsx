@@ -29,7 +29,7 @@ class FrugalHome extends React.Component<FrugalHomeProps, FrugalHomeState> {
         let background = location.state && location.state.background;
         return (
             <div className="root">
-                <Grid container >
+                <Grid container className="grid-container">
                     <Hidden smDown>
                         <Grid item xs />
                     </Hidden>
