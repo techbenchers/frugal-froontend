@@ -52,9 +52,8 @@ class FrugalHome extends React.Component<FrugalHomeProps, FrugalHomeState> {
                     </Hidden>
                 </Grid>
                 {!this.props.location.pathname.includes("new") && (<Link to="/new">
-                    <Fab className="new-post" variant="extended">
+                    <Fab className="new-post">
                         <AddIcon/>
-                        New
                     </Fab>
                 </Link>)}
             </div>
