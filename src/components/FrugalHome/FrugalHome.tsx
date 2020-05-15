@@ -29,12 +29,12 @@ class FrugalHome extends React.Component<FrugalHomeProps, FrugalHomeState> {
         let background = location.state && location.state.background;
         return (
             <div className="root">
-                <Grid container spacing={3}>
+                <Grid container >
                     <Hidden smDown>
                         <Grid item xs />
                     </Hidden>
 
-                    <Grid container item xs={12} md={6} spacing={2}>
+                    <Grid container item xs={12} md={6}>
                         <Grid item xs={12} zeroMinWidth>
                             <Suspense fallback={<div>Loading...</div>}>
                                 <Switch location={background || location}>
