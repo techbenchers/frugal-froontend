@@ -10,7 +10,7 @@
 }
 
 .new-post {
-    position: absolute !important;
+    position: fixed !important;
     bottom: 1rem;
     right: 1rem;
 }

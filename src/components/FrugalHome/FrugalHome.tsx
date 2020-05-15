@@ -1,11 +1,11 @@
-import React, {Suspense} from 'react';
+import React, { Suspense } from 'react';
 import Grid from '@material-ui/core/Grid';
-import {Fab, Hidden} from "@material-ui/core";
-import {Route, RouteComponentProps, Switch, withRouter} from "react-router";
-import {default as FrugalLogin} from "../Login/Login";
+import { Fab, Hidden } from "@material-ui/core";
+import { Route, RouteComponentProps, Switch, withRouter } from "react-router";
+import { default as FrugalLogin } from "../Login/Login";
 import './FrugalHome.css';
 import AddIcon from '@material-ui/icons/Add';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const FrugalBlogDisplay = React.lazy(() => import('../FrugalBlogDisplay/FrugalBlogDisplay'));
 const FrugalBlogContainer = React.lazy(() => import('../FrugalBlogContainer/FrugalBlogContainer'));
@@ -31,31 +31,32 @@ class FrugalHome extends React.Component<FrugalHomeProps, FrugalHomeState> {
             <div className="root">
                 <Grid container spacing={3}>
                     <Hidden smDown>
-                        <Grid item xs/>
+                        <Grid item xs />
                     </Hidden>
 
                     <Grid container item xs={12} md={6} spacing={2}>
                         <Grid item xs={12} zeroMinWidth>
                             <Suspense fallback={<div>Loading...</div>}>
                                 <Switch location={background || location}>
-                                    <Route exact path="/" children={<FrugalBlogContainer/>}/>
-                                    <Route exact path="/blog/:id" children={<FrugalBlogDisplay/>}/>
-                                    <Route path="/blog/:id/edit" children={<FrugalBlogEdit/>}/>
-                                    <Route path="/new" children={<FrugalBlogEdit/>}/>
+                                    <Route exact path="/" children={<FrugalBlogContainer />} />
+                                    <Route exact path="/blog/:id" children={<FrugalBlogDisplay />} />
+                                    <Route path="/blog/:id/edit" children={<FrugalBlogEdit />} />
+                                    <Route path="/new" children={<FrugalBlogEdit />} />
                                 </Switch>
-                                <Route path="/login" children={<FrugalLogin/>}/>
+                                <Route path="/login" children={<FrugalLogin />} />
                             </Suspense>
                         </Grid>
                     </Grid>
                     <Hidden smDown>
-                        <Grid item xs/>
+                        <Grid item xs />
                     </Hidden>
                 </Grid>
-                {!this.props.location.pathname.includes("new") && (<Link to="/new">
-                    <Fab className="new-post">
-                        <AddIcon/>
-                    </Fab>
-                </Link>)}
+                {!this.props.location.pathname.includes("new") && (
+                    <Link to="/new">
+                        <Fab className="new-post">
+                            <AddIcon />
+                        </Fab>
+                    </Link>)}
             </div>
         );
     }
