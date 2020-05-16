@@ -36,6 +36,12 @@ export class FrugalEditor extends React.PureComponent<FrugalEditorProps, FrugalE
         this.setEventHandlers();
     }
 
+    componentDidUpdate() {
+        if (this.editor) {
+            this.editor.setContents(this.props?.data);
+        }
+    }
+
     setEventHandlers = (): void => {
         if (this.props.onChange)
             this.editor?.on('text-change', this.props.onChange);
@@ -57,6 +63,7 @@ export class FrugalEditor extends React.PureComponent<FrugalEditorProps, FrugalE
     };
 
     render() {
+        console.log("frugal editor priops", this.props);
         return (
             <div id="editor">
                 <div id="editor-content" />

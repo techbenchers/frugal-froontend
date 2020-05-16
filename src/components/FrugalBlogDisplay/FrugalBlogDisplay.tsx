@@ -60,7 +60,6 @@ class FrugalBlogDisplay extends React.PureComponent<FrugalBlogDisplayProps, Frug
     render() {
         let postDelta = JSON.parse(JSON.stringify(post));
         let postHTML: string = DeltaToHTML.deltoToHTML(postDelta);
-        console.log("post html", postHTML);
         return (
             <>
                 <div className="blog-container" dangerouslySetInnerHTML={{ __html: postHTML }} />
