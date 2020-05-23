@@ -2,7 +2,8 @@ import React from 'react';
 import './FrugalBlogDisplay.css';
 import {RouteComponentProps, withRouter} from "react-router";
 import {connect} from 'react-redux'
-import {Blog} from '../../interface';
+import {Blog, StoreState} from '../../interface';
+import {FrugalCircularLoader} from "../FrugalCircularLoader/FrugalCircularLoader.";
 
 const FrugalEditor = React.lazy(() => import('../FrugalEditor/FrugalEditor'));
 
@@ -52,7 +53,8 @@ const FrugalEditor = React.lazy(() => import('../FrugalEditor/FrugalEditor'));
 
 
 export interface FrugalBlogDisplayProps extends RouteComponentProps {
-    post?: Blog;
+    blog?: Blog;
+    isLoading?: boolean;
 }
 
 export interface FrugalBlogDisplayState {
@@ -62,7 +64,7 @@ export interface FrugalBlogDisplayState {
 
 class FrugalBlogDisplay extends React.PureComponent<FrugalBlogDisplayProps, FrugalBlogDisplayState> {
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
 
     }
 
@@ -71,33 +73,33 @@ class FrugalBlogDisplay extends React.PureComponent<FrugalBlogDisplayProps, Frug
     }
 
     render() {
-        let blog: Blog = this.props.post as Blog;
-        let body: any = {};
-        body = JSON.parse(blog.body);
+        const {isLoading} = this.props;
+        if (isLoading) {
+            return <FrugalCircularLoader/>;
+        }
+        console.log('FrugalBlogDisplay render props', this.props);
+        const blog: Blog = this.props.blog as Blog || {};
+        let body: any = JSON.parse(blog.body || '{}');
         return (
             <>
-                {blog &&
-				<>
-					<FrugalEditor readonly={true} data={body}/>
-					<button onClick={() => {
-                        this.props.history.push(this.props.location.pathname + '/edit');
-                    }}>Edit
-					</button>
-				</>
-                }
+                <FrugalEditor readonly={true} data={body}/>
+                <button onClick={() => {
+                    this.props.history.push(this.props.location.pathname + '/edit');
+                }}>Edit
+                </button>
             </>
         );
     }
 
 }
 
-const mapStateToProps = (state: any, props: FrugalBlogDisplayProps) => {
-    let blogs: Blog[] = Object.values(state.blogs);
+const mapStateToProps = (state: StoreState, props: FrugalBlogDisplayProps) => {
+    const {isLoading} = state.blogState;
+    let blogs: Blog[] = Object.values(state.blogState.blogs);
     let uri: string = (props.match.params as any).id;
     let blog: Blog = blogs.find((b: Blog) => b.uri === uri) as Blog || {};
-    console.log("blog suyash", blog);
-    return {post: blog};
-}
+    return {blog: blog, isLoading: isLoading};
+};
 
 
 export default withRouter(connect(mapStateToProps)(FrugalBlogDisplay));

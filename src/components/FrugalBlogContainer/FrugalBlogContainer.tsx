@@ -1,11 +1,11 @@
 import React from 'react';
 import './FrugalBlogContainer.css';
 import {FrugalPostCard} from "../FrugalPostCard/FrugalPostCard";
-// import paella from "../../static/images/paella.jpeg";
 import {connect} from 'react-redux'
 import {MyBlogActions, MyUserActions} from "../../store/actions";
-import {Blog, User} from '../../interface';
+import {Blog, StoreState} from '../../interface';
 import {DateTime} from "luxon";
+import {FrugalCircularLoader} from "../FrugalCircularLoader/FrugalCircularLoader.";
 
 
 // const frugal: FrugalPostCardProps = {
@@ -36,7 +36,7 @@ import {DateTime} from "luxon";
 export interface FrugalBlogContainerProps {
     dispatch: (e: any) => void;
     blogs: Blog[];
-    user: User;
+    isLoading: boolean;
 }
 
 export interface FrugalBlogContainerState {
@@ -44,11 +44,14 @@ export interface FrugalBlogContainerState {
 }
 
 class FrugalBlogContainer extends React.Component<FrugalBlogContainerProps, FrugalBlogContainerState> {
-    componentDidMount() {
+
+    UNSAFE_componentWillMount() {
         // Todo: remove below lines
         this.props.dispatch(MyBlogActions.LoadBlog(""));
         this.props.dispatch(MyUserActions.GetUser(""));
+    }
 
+    componentDidMount() {
     }
 
     getCreatedDate(isoDate: string): string {
@@ -56,10 +59,15 @@ class FrugalBlogContainer extends React.Component<FrugalBlogContainerProps, Frug
     }
 
     render() {
+        const {isLoading} = this.props;
+        const {blogs} = this.props;
+        if (isLoading) {
+            return <FrugalCircularLoader/>
+        }
         return (
             <>
                 {
-                    this.props.blogs?.map((blog: Blog) => (
+                    blogs.map((blog: Blog) => (
                         <FrugalPostCard
                             key={blog.id || ''}
                             title={blog.title}
@@ -76,10 +84,10 @@ class FrugalBlogContainer extends React.Component<FrugalBlogContainerProps, Frug
     }
 }
 
-const mapStateToProps = (state: any) => {
-    let blogs: Blog[] = Object.values<Blog>(state.blogs);
-    let user: User = Object.values<User>(state.users)[0];
-    return {blogs: blogs, user: user};
+const mapStateToProps = (state: StoreState) => {
+    let blogs: Blog[] = Object.values<Blog>(state.blogState.blogs);
+    let isLoading: boolean = state.blogState.isLoading;
+    return {blogs: blogs, isLoading: isLoading};
 };
 
 export default connect(mapStateToProps)(FrugalBlogContainer);

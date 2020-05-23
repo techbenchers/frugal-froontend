@@ -1,33 +1,52 @@
-import { BlogActionsTypes} from "../actions";
-import {Blog, MyAction} from "../../interface";
+import {BlogActionsTypes} from "../actions";
+import {Blog, BlogState, MyAction} from "../../interface";
 
 
-export interface BlogState {
-    [id: string]: Blog;
-}
-
-
-const initState: BlogState = {};
+const initState: BlogState = {
+    blogs: {},
+    isLoading: false,
+};
 
 export const BlogReducer = (state: BlogState = initState, action: MyAction<any>): BlogState => {
     switch (action.type) {
+        case BlogActionsTypes.GetBlog:
+        case BlogActionsTypes.LoadBlog:
+        case BlogActionsTypes.DeleteBlog:
+        case BlogActionsTypes.UpdateBlog:
+        case BlogActionsTypes.LoadBlogsByUserId:
+        case BlogActionsTypes.AddBlog:
+            return {
+                ...state,
+                isLoading: true
+            };
         case BlogActionsTypes.GetBlogSuccess:
         case BlogActionsTypes.AddBlogSuccess:
         case BlogActionsTypes.UpdateBlogSuccess:
         case BlogActionsTypes.LoadBlogsByUserIdSuccess:
             return {
-                ...state, [action.payload.id]: action.payload
+                isLoading: false,
+                blogs: {
+                    ...state.blogs,
+                    [action.payload.id]: action.payload
+                }
             };
         case BlogActionsTypes.DeleteBlogSuccess:
-            delete state[action.payload];
-            return {...state};
+            delete state.blogs[action.payload];
+            return {
+                isLoading: false,
+                blogs: {...state.blogs}
+            };
         case BlogActionsTypes.LoadBlogSuccess:
             let tempState = state;
             action.payload.forEach((blog: Blog) => {
-                tempState = {...tempState, [blog.id as string]: blog};
+                tempState.blogs = {
+                    ...tempState.blogs,
+                    [blog.id as string]: blog
+                };
             });
             return {
-                ...tempState
+                isLoading: false,
+                blogs: {...tempState.blogs}
             };
         default:
             return state;

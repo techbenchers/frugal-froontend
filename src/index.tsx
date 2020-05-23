@@ -15,7 +15,7 @@ import { createMuiTheme, responsiveFontSizes, ThemeProvider } from '@material-ui
 let theme = createMuiTheme();
 theme = responsiveFontSizes(theme);
 
-let rootReducer = combineReducers({ blogs: BlogReducer, users: UserReducer });
+let rootReducer = combineReducers({blogState: BlogReducer, userState: UserReducer});
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaMiddleware)));

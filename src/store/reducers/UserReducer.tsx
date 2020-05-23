@@ -1,17 +1,24 @@
 import {UserActionsTypes} from "../actions";
-import {MyAction, User} from "../../interface";
+import {MyAction, UserState} from "../../interface";
 
 
-export interface UserState {
-    [id: string]: User;
-}
-
-const initState: UserState = {};
+const initState: UserState = {
+    user: {},
+    isLoading: false,
+};
 
 export const UserReducer = (state: UserState = initState, action: MyAction<any>): UserState => {
     switch (action.type) {
+        case UserActionsTypes.GetUser:
+            return {
+                ...state,
+                isLoading: true
+            };
         case UserActionsTypes.GetUserSuccess:
-            return {...state, [action.payload.id]: action.payload};
+            return {
+                isLoading: false,
+                user: {[action.payload.id]: action.payload}
+            };
         default:
             return state;
     }

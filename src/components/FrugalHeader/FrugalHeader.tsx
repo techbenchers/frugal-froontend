@@ -8,7 +8,7 @@ import './FrugalHeader.css';
 import {Link, useLocation} from "react-router-dom";
 import {FrugalMenu} from "../FrugalMenu/FrugalMenu";
 import {connect} from 'react-redux';
-import {User} from '../../interface';
+import {StoreState, User} from '../../interface';
 
 
 export interface FrugalHeaderProps {
@@ -64,7 +64,7 @@ class FrugalHeader extends React.PureComponent<FrugalHeaderProps, FrugalHeaderSt
                         </Typography>
                         <InputBase className="search" placeholder="Search"/>
                         {!user && <LoginButton/>}
-                        {user && <this.UserProfile/>}
+                        {!!user && <this.UserProfile/>}
                     </Toolbar>
                 </AppBar>
             </>
@@ -72,8 +72,8 @@ class FrugalHeader extends React.PureComponent<FrugalHeaderProps, FrugalHeaderSt
     }
 }
 
-const mapStateToProps = (state: any) => {
-    let user: User = Object.values<User>(state.users)[0];
+const mapStateToProps = (state: StoreState) => {
+    let user: User = Object.values<User>(state.userState.user)[0];
     return {user: user};
 };
 
