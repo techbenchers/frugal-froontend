@@ -7,10 +7,12 @@ import InputBase from '@material-ui/core/InputBase';
 import './FrugalHeader.css';
 import {Link, useLocation} from "react-router-dom";
 import {FrugalMenu} from "../FrugalMenu/FrugalMenu";
+import {connect} from 'react-redux';
+import {User} from '../../interface';
 
 
 export interface FrugalHeaderProps {
-
+    user: User;
 }
 
 export interface FrugalHeaderState {
@@ -29,7 +31,7 @@ export const LoginButton = (props: any) => {
     );
 };
 
-export class FrugalHeader extends React.PureComponent<FrugalHeaderProps, FrugalHeaderState> {
+class FrugalHeader extends React.PureComponent<FrugalHeaderProps, FrugalHeaderState> {
 
 
     UserProfile = () => {
@@ -52,21 +54,27 @@ export class FrugalHeader extends React.PureComponent<FrugalHeaderProps, FrugalH
 
 
     render() {
+        let {user} = this.props;
         return (
             <>
                 <AppBar position="sticky">
                     <Toolbar>
                         <Typography variant="h6" className="title">
                             <Link to="/">Blogs</Link>
-
                         </Typography>
                         <InputBase className="search" placeholder="Search"/>
-                        <LoginButton/>
-                        <this.UserProfile/>
+                        {!user && <LoginButton/>}
+                        {user && <this.UserProfile/>}
                     </Toolbar>
                 </AppBar>
             </>
         )
     }
-
 }
+
+const mapStateToProps = (state: any) => {
+    let user: User = Object.values<User>(state.users)[0];
+    return {user: user};
+};
+
+export default connect(mapStateToProps)(FrugalHeader);

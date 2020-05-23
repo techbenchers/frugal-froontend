@@ -7,7 +7,48 @@ async function generateBlog(): Promise<Blog> {
     const id: string = faker.random.uuid();
     const uri: string = title + '-' + id;
     return {
-        body: faker.lorem.paragraphs(),
+        body: JSON.stringify({
+            "ops": [{
+                "attributes": {"align": "justify"},
+                "insert": faker.lorem.paragraph(),
+            }, {
+                "attributes": {"align": "justify"},
+                "insert": "\n"
+            }, {"insert": faker.lorem.paragraph()}, {
+                "attributes": {"align": "justify"},
+                "insert": "\n"
+            }, {"insert": faker.lorem.paragraph()}, {
+                "attributes": {"align": "justify"},
+                "insert": "\n"
+            }, {"insert": faker.lorem.paragraph()}, {
+                "attributes": {"align": "justify"},
+                "insert": "\n"
+            }, {"insert": faker.lorem.paragraph()}, {
+                "attributes": {"align": "justify"},
+                "insert": "\n"
+            }, {"insert": faker.lorem.paragraph()}, {
+                "attributes": {"align": "justify"},
+                "insert": "\n"
+            }, {"insert": faker.lorem.paragraph()}, {
+                "attributes": {"align": "justify"},
+                "insert": "\n"
+            }, {"insert": faker.lorem.paragraph()}, {
+                "attributes": {"align": "justify"},
+                "insert": "\n"
+            }, {"insert": faker.lorem.paragraph()}, {
+                "attributes": {"align": "justify"},
+                "insert": "\n"
+            }, {"insert": faker.lorem.paragraph()}, {
+                "attributes": {"align": "justify"},
+                "insert": "\n"
+            }, {"insert": faker.lorem.paragraph()}, {
+                "attributes": {"align": "justify"},
+                "insert": "\n"
+            }, {"insert": faker.lorem.paragraph()}, {
+                "attributes": {"align": "justify"},
+                "insert": "\n"
+            }, {"insert": "\n"}]
+        }),
         createdAt: faker.date.past().toISOString(),
         isAnonymous: false,
         isPublished: false,

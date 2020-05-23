@@ -11,12 +11,12 @@ export class Blog {
     public publishedAt: string | null;
     public titleImage: string | null;
 
-    constructor(title: string, body: string) {
+    constructor(title: string, body: string, userId: string) {
         this.id = null;
         this.title = title;
         this.uri = null;
         this.body = body;
-        this.userId = null;
+        this.userId = userId;
         this.createdAt = null;
         this.isAnonymous = false;
         this.isPublished = false;

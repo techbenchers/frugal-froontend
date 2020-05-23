@@ -38,9 +38,9 @@ class FrugalHome extends React.Component<FrugalHomeProps, FrugalHomeState> {
                         <Grid item xs={12} zeroMinWidth>
                             <Suspense fallback={<div>Loading...</div>}>
                                 <Switch location={background || location}>
-                                    <Route exact path="/" children={<FrugalBlogContainer />} />
-                                    <Route exact path="/blog/:id" children={<FrugalBlogDisplay />} />
-                                    <Route path="/blog/:id/edit" children={<FrugalBlogEdit />} />
+                                    <Route exact path="/" children={<FrugalBlogContainer/>}/>
+                                    <Route exact path="/blog/:id" children={<FrugalBlogDisplay/>}/>
+                                    <Route path="/blog/:id/edit" children={<FrugalBlogEdit/>}/>
                                     <Route path="/new" children={<FrugalBlogEdit />} />
                                 </Switch>
                                 <Route path="/login" children={<FrugalLogin />} />

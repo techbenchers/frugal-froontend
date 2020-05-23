@@ -6,10 +6,10 @@ export interface BlogState {
     [id: string]: Blog;
 }
 
+
 const initState: BlogState = {};
 
 export const BlogReducer = (state: BlogState = initState, action: MyAction<any>): BlogState => {
-    console.log("sttore state ", state);
     switch (action.type) {
         case BlogActionsTypes.GetBlogSuccess:
         case BlogActionsTypes.AddBlogSuccess:

@@ -9,6 +9,7 @@ export interface FrugalEditorProps {
     getRef?: (e: Quill) => void;
     debug?: boolean;
     data?: any;
+    readonly?: boolean;
 }
 
 export interface FrugalEditorState {
@@ -25,7 +26,7 @@ const toolbarOptions = [
     ['blockquote', 'code-block'],
 ];
 
-export class FrugalEditor extends React.PureComponent<FrugalEditorProps, FrugalEditorState> {
+export default class FrugalEditor extends React.PureComponent<FrugalEditorProps, FrugalEditorState> {
 
     editor: Quill | undefined;
     editorOptions: QuillOptionsStatic = {};
@@ -33,10 +34,15 @@ export class FrugalEditor extends React.PureComponent<FrugalEditorProps, FrugalE
     componentDidMount(): void {
         this.setEditorOptions();
         this.editor = new Quill(document.getElementById('editor-content') as Element, this.editorOptions);
+        this.setContent();
         this.setEventHandlers();
     }
 
     componentDidUpdate() {
+        this.setContent();
+    }
+
+    setContent = () => {
         if (this.editor) {
             this.editor.setContents(this.props?.data);
         }
@@ -50,20 +56,24 @@ export class FrugalEditor extends React.PureComponent<FrugalEditorProps, FrugalE
     };
 
     setEditorOptions = (): void => {
+        let toolbar: any = {
+            container: toolbarOptions
+        };
+        if (this.props.readonly) {
+            toolbar = false;
+        }
         this.editorOptions = {
             placeholder: 'Enter your blog',
             debug: this.props?.debug,
             theme: 'snow',
             modules: {
-                toolbar: {
-                    container: toolbarOptions,
-                }
-            }
+                toolbar: toolbar
+            },
+            readOnly: this.props.readonly,
         };
     };
 
     render() {
-        console.log("frugal editor priops", this.props);
         return (
             <div id="editor">
                 <div id="editor-content" />

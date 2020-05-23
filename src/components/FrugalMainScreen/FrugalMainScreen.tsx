@@ -1,7 +1,7 @@
 import React from 'react';
 import './FrugalMainScreen.css';
 import FrugalHome from "../FrugalHome/FrugalHome";
-import {FrugalHeader} from "../FrugalHeader/FrugalHeader";
+import {default as FrugalHeader} from "../FrugalHeader/FrugalHeader";
 
 
 export interface FrugalMainScreenProps {
@@ -17,7 +17,6 @@ export default class FrugalMainScreen extends React.Component<FrugalMainScreenPr
 
 
     render() {
-        console.log('main screen called');
         return (
             <>
                 <FrugalHeader/>
