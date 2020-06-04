@@ -1,7 +1,7 @@
 import React from 'react';
 import './Main.css';
-import Home from "../Home/Home";
-import {default as Header} from "../Header/Header";
+import Home from '../Home/Home';
+import Header from "../Header";
 
 
 export interface MainProps {

@@ -3,7 +3,7 @@ import {RouteComponentProps, withRouter} from "react-router";
 import {connect} from 'react-redux'
 import './BlogAddUpdate.css';
 
-const FrugalEditor = React.lazy(() => import('../Editor/Editor'));
+const FrugalEditor = React.lazy(() => import('../Editor'));
 
 export interface BlogAddUpdateProps extends RouteComponentProps {
 

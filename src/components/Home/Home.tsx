@@ -1,16 +1,15 @@
 import React, {Suspense} from 'react';
-import Grid from '@material-ui/core/Grid';
-import {Fab, Hidden} from "@material-ui/core";
 import {Route, RouteComponentProps, Switch, withRouter} from "react-router";
 import './Home.css';
+import {Fab, Hidden, Grid} from "@material-ui/core";
 import AddIcon from '@material-ui/icons/Add';
 import {Link} from "react-router-dom";
-import {CircularLoader} from "../CircularLoader/CircularLoader";
+import {CircularLoader} from "../CircularLoader";
 
-const BlogView = React.lazy(() => import('../BlogView/BlogView'));
-const BlogListContainer = React.lazy(() => import('../BlogListContainer/BlogListContainer'));
-const BlogAddUpdate = React.lazy(() => import('../BlogAddUpdate/BlogAddUpdate'));
-const Login = React.lazy(() => import('../Login/Login'));
+const BlogView = React.lazy(() => import('../BlogView'));
+const BlogListContainer = React.lazy(() => import('../BlogListContainer'));
+const BlogAddUpdate = React.lazy(() => import('../BlogAddUpdate'));
+const Login = React.lazy(() => import('../Login'));
 
 export interface HomeProps extends RouteComponentProps {
 

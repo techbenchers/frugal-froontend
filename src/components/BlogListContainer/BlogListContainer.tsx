@@ -1,11 +1,11 @@
 import React from 'react';
 import './BlogListContainer.css';
-import {BlogCard} from "../BlogCard/BlogCard";
+import {BlogCard} from "../BlogCard";
 import {connect} from 'react-redux'
 import {MyBlogActions, MyUserActions} from "../../store/actions";
 import {Blog, StoreState} from '../../interface';
 import {DateTime} from "luxon";
-import {CircularLoader} from "../CircularLoader/CircularLoader";
+import {CircularLoader} from "../CircularLoader";
 
 export interface BlogListContainerProps {
     dispatch: (e: any) => void;

@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 import {Blog, StoreState} from '../../interface';
 import {CircularLoader} from "../CircularLoader/CircularLoader";
 
-const Editor = React.lazy(() => import('../Editor/Editor'));
+const Editor = React.lazy(() => import('../Editor'));
 
 export interface BlogViewProps extends RouteComponentProps {
     blog?: Blog;
