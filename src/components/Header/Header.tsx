@@ -4,18 +4,18 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import InputBase from '@material-ui/core/InputBase';
-import './FrugalHeader.css';
+import './Header.css';
 import {Link, useLocation} from "react-router-dom";
-import {FrugalMenu} from "../FrugalMenu/FrugalMenu";
+import {Menu} from "../Menu/Menu";
 import {connect} from 'react-redux';
 import {StoreState, User} from '../../interface';
 
 
-export interface FrugalHeaderProps {
+export interface HeaderProps {
     user: User;
 }
 
-export interface FrugalHeaderState {
+export interface HeaderState {
 
 }
 
@@ -31,7 +31,7 @@ export const LoginButton = (props: any) => {
     );
 };
 
-class FrugalHeader extends React.PureComponent<FrugalHeaderProps, FrugalHeaderState> {
+class Header extends React.PureComponent<HeaderProps, HeaderState> {
 
 
     UserProfile = () => {
@@ -48,7 +48,7 @@ class FrugalHeader extends React.PureComponent<FrugalHeaderProps, FrugalHeaderSt
         ];
 
         return (
-            <FrugalMenu options={options}/>
+            <Menu options={options}/>
         )
     };
 
@@ -77,4 +77,4 @@ const mapStateToProps = (state: StoreState) => {
     return {user: user};
 };
 
-export default connect(mapStateToProps)(FrugalHeader);
+export default connect(mapStateToProps)(Header);

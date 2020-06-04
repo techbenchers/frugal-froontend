@@ -1,13 +1,12 @@
 import React from 'react';
 import './App.css';
 import {withRouter} from "react-router-dom";
-import FrugalMainScreen from "./components/FrugalMainScreen/FrugalMainScreen";
-
+import Main from "./components/Main/Main";
 
 function App() {
     return (
         <>
-            <FrugalMainScreen/>
+            <Main/>
         </>
     );
 }

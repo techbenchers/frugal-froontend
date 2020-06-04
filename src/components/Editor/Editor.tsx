@@ -1,9 +1,9 @@
 import React from 'react';
-import Quill, { QuillOptionsStatic } from 'quill';
-import './FrugalEditor.css';
+import Quill, {QuillOptionsStatic} from 'quill';
+import './Editor.css';
 
 
-export interface FrugalEditorProps {
+export interface EditorProps {
     onChange?: (d: any) => void;
     getAllContent?: (d: any) => void;
     getRef?: (e: Quill) => void;
@@ -12,21 +12,21 @@ export interface FrugalEditorProps {
     readonly?: boolean;
 }
 
-export interface FrugalEditorState {
+export interface EditorState {
 
 }
 
 const toolbarOptions = [
-    [{ 'size': ['small', false, 'large', 'huge'] }],
+    [{'size': ['small', false, 'large', 'huge']}],
     // [{'font': []}],
     ['bold', 'italic', 'underline'],
-    [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-    [{ 'align': [] }],
+    [{'list': 'ordered'}, {'list': 'bullet'}],
+    [{'align': []}],
     ['image', 'video', 'link'],
     ['blockquote', 'code-block'],
 ];
 
-export default class FrugalEditor extends React.PureComponent<FrugalEditorProps, FrugalEditorState> {
+export default class Editor extends React.PureComponent<EditorProps, EditorState> {
 
     editor: Quill | undefined;
     editorOptions: QuillOptionsStatic = {};
@@ -46,7 +46,7 @@ export default class FrugalEditor extends React.PureComponent<FrugalEditorProps,
         if (this.editor) {
             this.editor.setContents(this.props?.data);
         }
-    }
+    };
 
     setEventHandlers = (): void => {
         if (this.props.onChange)
@@ -76,7 +76,7 @@ export default class FrugalEditor extends React.PureComponent<FrugalEditorProps,
     render() {
         return (
             <div id="editor">
-                <div id="editor-content" />
+                <div id="editor-content"/>
             </div>
         );
     }

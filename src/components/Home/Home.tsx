@@ -2,28 +2,26 @@ import React, {Suspense} from 'react';
 import Grid from '@material-ui/core/Grid';
 import {Fab, Hidden} from "@material-ui/core";
 import {Route, RouteComponentProps, Switch, withRouter} from "react-router";
-import {default as FrugalLogin} from "../Login/Login";
-import './FrugalHome.css';
+import './Home.css';
 import AddIcon from '@material-ui/icons/Add';
 import {Link} from "react-router-dom";
-import {FrugalCircularLoader} from "../FrugalCircularLoader/FrugalCircularLoader.";
+import {CircularLoader} from "../CircularLoader/CircularLoader";
 
-const FrugalBlogDisplay = React.lazy(() => import('../FrugalBlogDisplay/FrugalBlogDisplay'));
-const FrugalBlogContainer = React.lazy(() => import('../FrugalBlogContainer/FrugalBlogContainer'));
-const FrugalBlogEdit = React.lazy(() => import('../FrugalBlogEdit/FrugalBlogEdit'));
+const BlogView = React.lazy(() => import('../BlogView/BlogView'));
+const BlogListContainer = React.lazy(() => import('../BlogListContainer/BlogListContainer'));
+const BlogAddUpdate = React.lazy(() => import('../BlogAddUpdate/BlogAddUpdate'));
+const Login = React.lazy(() => import('../Login/Login'));
 
-// const FrugalLogin = React.lazy(() => import('../Login/Login'));
-
-export interface FrugalHomeProps extends RouteComponentProps {
-
-}
-
-export interface FrugalHomeState {
+export interface HomeProps extends RouteComponentProps {
 
 }
 
+export interface HomeState {
 
-class FrugalHome extends React.Component<FrugalHomeProps, FrugalHomeState> {
+}
+
+
+class Home extends React.Component<HomeProps, HomeState> {
     render() {
         let location = this.props.location;
         // @ts-ignore
@@ -37,14 +35,14 @@ class FrugalHome extends React.Component<FrugalHomeProps, FrugalHomeState> {
 
                     <Grid container item xs={12} md={6}>
                         <Grid item xs={12} zeroMinWidth>
-                            <Suspense fallback={<FrugalCircularLoader/>}>
+                            <Suspense fallback={<CircularLoader/>}>
                                 <Switch location={background || location}>
-                                    <Route exact path="/" children={<FrugalBlogContainer/>}/>
-                                    <Route exact path="/blog/:id" children={<FrugalBlogDisplay/>}/>
-                                    <Route path="/blog/:id/edit" children={<FrugalBlogEdit/>}/>
-                                    <Route path="/new" children={<FrugalBlogEdit/>}/>
+                                    <Route exact path="/" children={<BlogListContainer/>}/>
+                                    <Route exact path="/blog/:id" children={<BlogView/>}/>
+                                    <Route path="/blog/:id/edit" children={<BlogAddUpdate/>}/>
+                                    <Route path="/new" children={<BlogAddUpdate/>}/>
                                 </Switch>
-                                <Route path="/login" children={<FrugalLogin/>}/>
+                                <Route path="/login" children={<Login/>}/>
                             </Suspense>
                         </Grid>
                     </Grid>
@@ -63,4 +61,4 @@ class FrugalHome extends React.Component<FrugalHomeProps, FrugalHomeState> {
     }
 }
 
-export default withRouter(FrugalHome);
+export default withRouter(Home);

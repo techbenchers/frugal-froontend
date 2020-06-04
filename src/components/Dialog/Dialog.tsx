@@ -1,7 +1,13 @@
 import React from 'react';
-import {Dialog, DialogTitle, DialogActions, DialogContentText, DialogContent} from "@material-ui/core";
+import {
+    Dialog as MaterialDialog,
+    DialogTitle,
+    DialogActions,
+    DialogContentText,
+    DialogContent
+} from "@material-ui/core";
 
-export interface DialigProps {
+export interface DialogProps {
     open: boolean;
     handleClose?: (e: any) => void;
     title?: string;
@@ -17,7 +23,7 @@ export interface DialogState {
 
 }
 
-export class FrugalDialog extends React.PureComponent<DialigProps, DialogState> {
+export class Dialog extends React.PureComponent<DialogProps, DialogState> {
 
     GetDialogContentText = () => {
         if (this.props.contentText)
@@ -27,8 +33,8 @@ export class FrugalDialog extends React.PureComponent<DialigProps, DialogState> 
 
     render() {
         return (
-            <Dialog onBackdropClick={this.props.onBackdropClick} onClose={this.props.handleClose}
-                    aria-labelledby="dialog-title" open={this.props.open}>
+            <MaterialDialog onBackdropClick={this.props.onBackdropClick} onClose={this.props.handleClose}
+                            aria-labelledby="dialog-title" open={this.props.open}>
                 {this.props.title && <DialogTitle id="dialog-title">{this.props.title}</DialogTitle>}
                 {this.props.children &&
 				<DialogContent>
@@ -38,7 +44,7 @@ export class FrugalDialog extends React.PureComponent<DialigProps, DialogState> 
 				</DialogContent>
                 }
                 {this.props.isAction && <DialogActions>{this.props.actions}</DialogActions>}
-            </Dialog>
+            </MaterialDialog>
         )
     }
 }

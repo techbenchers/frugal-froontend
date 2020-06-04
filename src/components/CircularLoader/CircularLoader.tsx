@@ -1,11 +1,11 @@
 import React from 'react';
-import './FrugalCircularLoader.css';
+import './CircularLoader.css';
 import {CircularProgress} from "@material-ui/core";
 
-const MyCircularLoader = () => {
+const Loader = () => {
     return <div className="loading">
         <CircularProgress/>
     </div>
 };
 
-export const FrugalCircularLoader = React.memo(MyCircularLoader);
+export const CircularLoader = React.memo(Loader);

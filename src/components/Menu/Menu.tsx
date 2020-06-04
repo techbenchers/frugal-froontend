@@ -1,22 +1,19 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import {Avatar} from "@material-ui/core";
+import {Menu as MaterialMenu, MenuItem, Avatar, Button} from '@material-ui/core';
 
-export interface FrugalMenuProps {
+export interface MenuProps {
     options: any[];
     handleClose?: () => void;
     handleOpen?: () => void;
 }
 
-export interface FrugalMenuState {
+export interface MenuState {
     anchorEl: HTMLElement | null;
 }
 
-export class FrugalMenu extends React.PureComponent<FrugalMenuProps, FrugalMenuState> {
+export class Menu extends React.PureComponent<MenuProps, MenuState> {
 
-    constructor(props: FrugalMenuProps) {
+    constructor(props: MenuProps) {
         super(props);
         this.state = {
             anchorEl: null
@@ -40,7 +37,7 @@ export class FrugalMenu extends React.PureComponent<FrugalMenuProps, FrugalMenuS
                 <Button aria-controls="simple-menu" aria-haspopup="true" onClick={this.handleClick}>
                     <Avatar>GK</Avatar>
                 </Button>
-                <Menu
+                <MaterialMenu
                     id="simple-menu"
                     anchorEl={anchorEl}
                     keepMounted
@@ -61,7 +58,7 @@ export class FrugalMenu extends React.PureComponent<FrugalMenuProps, FrugalMenuS
                             <MenuItem key={o.label.toLowerCase()} onClick={this.handleClose}>{o.label}</MenuItem>
                         )
                     })}
-                </Menu>
+                </MaterialMenu>
             </>
         );
     }

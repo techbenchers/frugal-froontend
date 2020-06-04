@@ -1,15 +1,15 @@
 import React from 'react';
 import {RouteComponentProps, withRouter} from "react-router";
 import {connect} from 'react-redux'
-import './FrugalBlogEdit.css';
+import './BlogAddUpdate.css';
 
-const FrugalEditor = React.lazy(() => import('../FrugalEditor/FrugalEditor'));
+const FrugalEditor = React.lazy(() => import('../Editor/Editor'));
 
-export interface FrugalBlogEditProps extends RouteComponentProps {
+export interface BlogAddUpdateProps extends RouteComponentProps {
 
 }
 
-export interface FrugalBlogEditState {
+export interface BlogAddUpdateState {
     edit: boolean;
 }
 
@@ -56,9 +56,9 @@ const post = {
     }, {"insert": "\n"}]
 };
 
-class FrugalBlogEdit extends React.Component<FrugalBlogEditProps, FrugalBlogEditState> {
+class BlogAddUpdate extends React.Component<BlogAddUpdateProps, BlogAddUpdateState> {
 
-    constructor(props: FrugalBlogEditProps) {
+    constructor(props: BlogAddUpdateProps) {
         super(props);
         this.state = {
             edit: false,
@@ -96,4 +96,4 @@ const mapStateToProps = (state: any) => {
     return {};
 };
 
-export default connect(mapStateToProps)(withRouter(FrugalBlogEdit));
+export default connect(mapStateToProps)(withRouter(BlogAddUpdate));

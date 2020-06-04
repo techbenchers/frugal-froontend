@@ -4,16 +4,16 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
-import './FrugalPostCard.css';
+import './BlogCard.css';
 import {IconButton} from "@material-ui/core";
 import CardActions from "@material-ui/core/CardActions";
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import Box from "@material-ui/core/Box";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 
 
-export interface FrugalPostCardProps {
+export interface BlogCardProps {
     uri: string;
     img?: any;
     alt?: string;
@@ -23,15 +23,15 @@ export interface FrugalPostCardProps {
     author?: string;
 }
 
-export interface FrugalPostCardState {
+export interface BlogCardState {
 
 }
 
-export class FrugalPostCard extends React.PureComponent<FrugalPostCardProps, FrugalPostCardState> {
+export class BlogCard extends React.PureComponent<BlogCardProps, BlogCardState> {
 
 
     render() {
-        const { uri } = this.props;
+        const {uri} = this.props;
         return (
             <Box width="100%">
                 <Link to={`/blog/${uri}`}>
@@ -85,5 +85,4 @@ export class FrugalPostCard extends React.PureComponent<FrugalPostCardProps, Fru
             </Box>
         );
     }
-
 }

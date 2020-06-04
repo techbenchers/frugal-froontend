@@ -1,6 +1,6 @@
 import React from 'react';
 import {Button, Link} from "@material-ui/core";
-import {FrugalDialog} from "../FrugalDialog/FrugalDialog";
+import {Dialog} from "../Dialog/Dialog";
 import './Login.css';
 import google from '../../static/images/logo/google.png';
 import github from '../../static/images/logo/github.png';
@@ -37,7 +37,7 @@ class Login extends React.PureComponent<LoginProps, LoginState> {
     render() {
         return (
             <>
-                <FrugalDialog onBackdropClick={this.onBackdropClick} title={'Sign In'} open={this.state.open}>
+                <Dialog onBackdropClick={this.onBackdropClick} title={'Sign In'} open={this.state.open}>
                     <div className='button-container'>
                         <Link href={loginUrl.google}>
                             <Button startIcon={<img src={google} alt='Google logo'/>} variant='outlined'>
@@ -50,7 +50,7 @@ class Login extends React.PureComponent<LoginProps, LoginState> {
                             </Button>
                         </Link>
                     </div>
-                </FrugalDialog>
+                </Dialog>
             </>
         )
     }

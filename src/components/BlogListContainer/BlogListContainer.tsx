@@ -1,49 +1,23 @@
 import React from 'react';
-import './FrugalBlogContainer.css';
-import {FrugalPostCard} from "../FrugalPostCard/FrugalPostCard";
+import './BlogListContainer.css';
+import {BlogCard} from "../BlogCard/BlogCard";
 import {connect} from 'react-redux'
 import {MyBlogActions, MyUserActions} from "../../store/actions";
 import {Blog, StoreState} from '../../interface';
 import {DateTime} from "luxon";
-import {FrugalCircularLoader} from "../FrugalCircularLoader/FrugalCircularLoader.";
+import {CircularLoader} from "../CircularLoader/CircularLoader";
 
-
-// const frugal: FrugalPostCardProps = {
-//     uri: "Shrimp-and-Chorizo-Paella-123",
-//     img: paella,
-//     alt: "paella",
-//     title: "Shrimp and Chorizo Paella",
-//     date: "September 14, 2016",
-//     body: "This impressive paella is a perfect party dish and a fun meal to cook together with your guests.",
-//     author: "Aniket Singh"
-// };
-// const list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
-// const blog: Blog = {
-//     id: "qwe123",
-//     titleImage: "",
-//     title: "Avengers Assemble",
-//     publishedAt: "",
-//     updatedAt: "",
-//     isPublished: false,
-//     isAnonymous: false,
-//     createdAt: "",
-//     userId: "user123",
-//     body: "loremmdasdashdahsdjkaksdhkasbvdiuabsdjhas da sd a sd a sdkasdasdkasd",
-//     uri: "Avengers-Assemble-qwe123"
-// };
-
-export interface FrugalBlogContainerProps {
+export interface BlogListContainerProps {
     dispatch: (e: any) => void;
     blogs: Blog[];
     isLoading: boolean;
 }
 
-export interface FrugalBlogContainerState {
+export interface BlogListContainerState {
 
 }
 
-class FrugalBlogContainer extends React.Component<FrugalBlogContainerProps, FrugalBlogContainerState> {
+class BlogListContainer extends React.Component<BlogListContainerProps, BlogListContainerState> {
 
     UNSAFE_componentWillMount() {
         // Todo: remove below lines
@@ -62,13 +36,13 @@ class FrugalBlogContainer extends React.Component<FrugalBlogContainerProps, Frug
         const {isLoading} = this.props;
         const {blogs} = this.props;
         if (isLoading) {
-            return <FrugalCircularLoader/>
+            return <CircularLoader/>
         }
         return (
             <>
                 {
                     blogs.map((blog: Blog) => (
-                        <FrugalPostCard
+                        <BlogCard
                             key={blog.id || ''}
                             title={blog.title}
                             uri={blog.uri as string}
@@ -90,4 +64,4 @@ const mapStateToProps = (state: StoreState) => {
     return {blogs: blogs, isLoading: isLoading};
 };
 
-export default connect(mapStateToProps)(FrugalBlogContainer);
+export default connect(mapStateToProps)(BlogListContainer);
