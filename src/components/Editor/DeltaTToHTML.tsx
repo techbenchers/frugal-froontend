@@ -6,6 +6,6 @@ export class DeltaToHTML {
         let div = document.createElement('div') as Element;
         let editor = new Quill(div);
         editor.setContents(data);
-        return div.getElementsByClassName('ql-editor')[0].innerHTML;
+        return editor.getText();;
     };
 }

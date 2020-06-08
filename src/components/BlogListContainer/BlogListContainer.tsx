@@ -6,6 +6,7 @@ import {MyBlogActions, MyUserActions} from "../../store/actions";
 import {Blog, StoreState} from '../../interface';
 import {DateTime} from "luxon";
 import {CircularLoader} from "../CircularLoader";
+import { DeltaToHTML } from '../Editor';
 
 export interface BlogListContainerProps {
     dispatch: (e: any) => void;
@@ -32,6 +33,10 @@ class BlogListContainer extends React.Component<BlogListContainerProps, BlogList
         return DateTime.fromISO(isoDate).toFormat("LLL dd, yyyy");
     }
 
+    getShortBlog = (deltaString: string): string => {
+        return DeltaToHTML.deltoToHTML(JSON.parse(deltaString)).substr(0, 200) + '...';
+    }
+
     render() {
         const {isLoading} = this.props;
         const {blogs} = this.props;
@@ -48,7 +53,7 @@ class BlogListContainer extends React.Component<BlogListContainerProps, BlogList
                             uri={blog.uri as string}
                             alt={blog.title as string}
                             author={"Suyash Deshpande"}
-                            body={blog.body.substr(0, 200) + '...'}
+                            body={this.getShortBlog(blog.body)}
                             img={blog.titleImage}
                             date={this.getCreatedDate(blog.createdAt as string)}/>
                     ))

@@ -3,7 +3,7 @@ import './BlogView.css';
 import {RouteComponentProps, withRouter} from "react-router";
 import {connect} from 'react-redux'
 import {Blog, StoreState} from '../../interface';
-import {CircularLoader} from "../CircularLoader/CircularLoader";
+import {CircularLoader} from "../CircularLoader";
 
 const Editor = React.lazy(() => import('../Editor'));
 
