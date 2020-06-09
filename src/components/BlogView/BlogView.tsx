@@ -19,7 +19,6 @@ export interface BlogViewState {
 class BlogView extends React.PureComponent<BlogViewProps, BlogViewState> {
 
     UNSAFE_componentWillMount() {
-
     }
 
     componentDidMount() {
@@ -28,11 +27,11 @@ class BlogView extends React.PureComponent<BlogViewProps, BlogViewState> {
 
     render() {
         const {isLoading} = this.props;
-        if (isLoading) {
+        const blog: Blog = this.props.blog as Blog;
+        if (isLoading || !blog) {
             return <CircularLoader/>;
         }
-        const blog: Blog = this.props.blog as Blog || {};
-        let body: any = JSON.parse(blog.body || '{}');
+        let body: any = JSON.parse(blog.body);
         return (
             <>
                 <Editor readonly={true} data={body}/>
@@ -50,7 +49,7 @@ const mapStateToProps = (state: StoreState, props: BlogViewProps) => {
     const {isLoading} = state.blogState;
     let blogs: Blog[] = Object.values(state.blogState.blogs);
     let uri: string = (props.match.params as any).id;
-    let blog: Blog = blogs.find((b: Blog) => b.uri === uri) as Blog || {};
+    let blog: Blog = blogs.find((b: Blog) => b.uri === uri) as Blog;
     return {blog: blog, isLoading: isLoading};
 };
 

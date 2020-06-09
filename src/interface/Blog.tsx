@@ -1,15 +1,15 @@
 export class Blog {
-    public id: string | null;
+    public id: string;
     public title: string;
-    public uri: string | null;
+    public uri: string;
     public body: string;
-    public userId: string | null;
-    public createdAt: string | null;
+    public userId: string;
+    public createdAt: string;
     public isAnonymous: boolean;
     public isPublished: boolean;
-    public updatedAt: string | null;
-    public publishedAt: string | null;
-    public titleImage: string | null;
+    public updatedAt: string;
+    public publishedAt: string;
+    public titleImage: string;
 
     constructor(title: string, body: string, userId: string) {
         this.id = null;
