@@ -1,12 +1,13 @@
 import React from 'react';
-import {BlogCard} from "../BlogCard";
-import {connect} from 'react-redux'
-import {MyBlogActions, MyUserActions} from "../../store/actions";
-import {Blog, StoreState} from '../../interface';
-import {DateTime} from "luxon";
-import {CircularLoader} from "../CircularLoader";
+import { BlogCard } from "../BlogCard";
+import { connect } from 'react-redux'
+import { MyBlogActions, MyUserActions } from "../../store/actions";
+import { Blog, StoreState } from '../../interface';
+import { DateTime } from "luxon";
+import { CircularLoader } from "../CircularLoader";
 import { DeltaToHTML } from '../Editor';
 import './BlogListContainer.scss';
+import { Box } from '@material-ui/core';
 
 export interface BlogListContainerProps {
     dispatch: (e: any) => void;
@@ -38,10 +39,20 @@ class BlogListContainer extends React.PureComponent<BlogListContainerProps, Blog
     }
 
     render() {
-        const {isLoading} = this.props;
-        const {blogs} = this.props;
+        const { isLoading } = this.props;
+        const { blogs } = this.props;
         if (isLoading) {
-            return <CircularLoader/>
+            return <CircularLoader />
+        }
+        if (!blogs.length) {
+            return (
+                <Box display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    height={1}>
+                    No Blogs
+                </Box>
+            );
         }
         return (
             <>
@@ -55,7 +66,7 @@ class BlogListContainer extends React.PureComponent<BlogListContainerProps, Blog
                             author={"Suyash Deshpande"}
                             body={this.getShortBlog(blog.body)}
                             img={blog.titleImage}
-                            date={this.getCreatedDate(blog.createdAt as string)}/>
+                            date={this.getCreatedDate(blog.createdAt as string)} />
                     ))
                 }
             </>
@@ -66,7 +77,7 @@ class BlogListContainer extends React.PureComponent<BlogListContainerProps, Blog
 const mapStateToProps = (state: StoreState) => {
     let blogs: Blog[] = Object.values<Blog>(state.blogState.blogs);
     let isLoading: boolean = state.blogState.isLoading;
-    return {blogs: blogs, isLoading: isLoading};
+    return { blogs: blogs, isLoading: isLoading };
 };
 
 export default connect(mapStateToProps)(BlogListContainer);
