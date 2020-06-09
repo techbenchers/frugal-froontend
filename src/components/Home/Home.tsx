@@ -1,10 +1,10 @@
 import React, {Suspense} from 'react';
 import {Route, RouteComponentProps, Switch, withRouter} from "react-router";
-import './Home.css';
 import {Fab, Hidden, Grid} from "@material-ui/core";
 import AddIcon from '@material-ui/icons/Add';
 import {Link} from "react-router-dom";
 import {CircularLoader} from "../CircularLoader";
+import './Home.scss';
 
 const BlogView = React.lazy(() => import('../BlogView'));
 const BlogListContainer = React.lazy(() => import('../BlogListContainer'));

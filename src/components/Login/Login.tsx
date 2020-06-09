@@ -1,10 +1,10 @@
 import React from 'react';
 import {Button, Link} from "@material-ui/core";
 import {Dialog} from "../Dialog";
-import './Login.css';
 import google from '../../static/images/logo/google.png';
 import github from '../../static/images/logo/github.png';
 import {RouteComponentProps, withRouter} from "react-router";
+import './Login.scss';
 
 const loginUrl = {
     google: '/oauth2/authorization/google',

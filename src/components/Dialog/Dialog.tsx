@@ -6,6 +6,7 @@ import {
     DialogContentText,
     DialogContent
 } from "@material-ui/core";
+import './Dialog.scss';
 
 export interface DialogProps {
     open: boolean;

@@ -1,7 +1,7 @@
 import React from 'react';
 import {RouteComponentProps, withRouter} from "react-router";
 import {connect} from 'react-redux'
-import './BlogAddUpdate.css';
+import './BlogAddUpdate.scss';
 import {Blog, StoreState} from '../../interface';
 
 const FrugalEditor = React.lazy(() => import('../Editor'));

@@ -1,9 +1,9 @@
 import React from 'react';
-import './App.css';
 import {withRouter} from "react-router-dom";
 import Main from "./components/Main";
+import './App.scss';
 
-function App() {
+const App = () => {
     return (
         <>
             <Main/>
@@ -11,4 +11,4 @@ function App() {
     );
 }
 
-export default withRouter(App);
+export default withRouter(React.memo(App));

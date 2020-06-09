@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from "react-router-dom";
@@ -11,6 +10,8 @@ import createSagaMiddleware from 'redux-saga';
 import { rootSaga } from './store/saga';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { createMuiTheme, responsiveFontSizes, ThemeProvider } from '@material-ui/core/styles';
+import './index.scss';
+
 
 let theme = createMuiTheme();
 theme = responsiveFontSizes(theme);

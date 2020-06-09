@@ -4,13 +4,14 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
-import './BlogCard.css';
 import {IconButton} from "@material-ui/core";
 import CardActions from "@material-ui/core/CardActions";
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import Box from "@material-ui/core/Box";
 import {Link} from "react-router-dom";
+import './BlogCard.scss';
+
 
 
 export interface BlogCardProps {

@@ -1,6 +1,6 @@
 import React from 'react';
 import Quill, {QuillOptionsStatic} from 'quill';
-import './Editor.css';
+import './Editor.scss';
 
 
 export interface EditorProps {

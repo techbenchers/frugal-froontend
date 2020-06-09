@@ -1,6 +1,6 @@
 import React from 'react';
-import './CircularLoader.css';
 import {CircularProgress} from "@material-ui/core";
+import './CircularLoader.scss';
 
 const Loader = () => {
     return <div className="loading">

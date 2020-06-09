@@ -1,5 +1,11 @@
 import React from 'react';
-import {Menu as MaterialMenu, MenuItem, Avatar, Button} from '@material-ui/core';
+import {
+    Menu as MaterialMenu,
+    MenuItem,
+    Avatar,
+    Button
+} from '@material-ui/core';
+import './Menu.scss';
 
 export interface MenuProps {
     options: any[];
@@ -21,17 +27,17 @@ export class Menu extends React.PureComponent<MenuProps, MenuState> {
     }
 
     handleClose = () => {
-        this.setState({anchorEl: null});
+        this.setState({ anchorEl: null });
     };
 
     handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-        this.setState({anchorEl: event.currentTarget});
+        this.setState({ anchorEl: event.currentTarget });
     };
 
 
     render() {
-        const {anchorEl} = this.state;
-        const {options} = this.props;
+        const { anchorEl } = this.state;
+        const { options } = this.props;
         return (
             <>
                 <Button aria-controls="simple-menu" aria-haspopup="true" onClick={this.handleClick}>

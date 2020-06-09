@@ -1,5 +1,4 @@
 import React from 'react';
-import './BlogListContainer.css';
 import {BlogCard} from "../BlogCard";
 import {connect} from 'react-redux'
 import {MyBlogActions, MyUserActions} from "../../store/actions";
@@ -7,6 +6,7 @@ import {Blog, StoreState} from '../../interface';
 import {DateTime} from "luxon";
 import {CircularLoader} from "../CircularLoader";
 import { DeltaToHTML } from '../Editor';
+import './BlogListContainer.scss';
 
 export interface BlogListContainerProps {
     dispatch: (e: any) => void;
@@ -18,7 +18,7 @@ export interface BlogListContainerState {
 
 }
 
-class BlogListContainer extends React.Component<BlogListContainerProps, BlogListContainerState> {
+class BlogListContainer extends React.PureComponent<BlogListContainerProps, BlogListContainerState> {
 
     UNSAFE_componentWillMount() {
         // Todo: remove below lines

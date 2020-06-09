@@ -1,9 +1,9 @@
 import React from 'react';
-import './BlogView.css';
 import {RouteComponentProps, withRouter} from "react-router";
 import {connect} from 'react-redux'
 import {Blog, StoreState} from '../../interface';
 import {CircularLoader} from "../CircularLoader";
+import './BlogView.scss';
 
 const Editor = React.lazy(() => import('../Editor'));
 
