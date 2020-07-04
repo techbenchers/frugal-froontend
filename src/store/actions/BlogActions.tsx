@@ -1,4 +1,5 @@
 import {Blog, MyAction} from "../../interface";
+import {BlogService} from "../../service";
 
 export enum BlogActionsTypes {
     // Get single blog by id
@@ -34,11 +35,19 @@ export enum BlogActionsTypes {
 
 export class MyBlogActions {
 
-    public static GetBlog(payload: string): MyAction<string> {
-        return {
+    public static GetBlog(payload: string, dispatch: Function): MyAction<string> {
+        const action = {
             type: BlogActionsTypes.GetBlog,
             payload: payload
         };
+        BlogService.getBlog(payload)
+            .then((blog: Blog) => {
+                dispatch(MyBlogActions.GetBlogSuccess(blog));
+            })
+            .catch((err) => {
+                dispatch(MyBlogActions.GetBlogFail(err.toString()));
+            });
+        return action;
     }
 
     public static GetBlogSuccess(payload: Blog): MyAction<Blog> {
@@ -55,11 +64,21 @@ export class MyBlogActions {
         };
     }
 
-    public static LoadBlogsByUserId(payload: string): MyAction<string> {
-        return {
+    public static LoadBlogsByUserId(payload: string, dispatch: Function): MyAction<string> {
+        const action = {
             type: BlogActionsTypes.LoadBlogsByUserId,
             payload: payload
         };
+
+        BlogService.getUserBlogs(payload)
+            .then((blogs: Blog[]) => {
+                dispatch(MyBlogActions.LoadBlogsByUserIdSuccess(blogs));
+            })
+            .catch((err) => {
+                dispatch(MyBlogActions.LoadBlogsByUserIdFail(err.toString()))
+            });
+
+        return action;
     }
 
     public static LoadBlogsByUserIdSuccess(payload: Blog[]): MyAction<Blog[]> {
@@ -76,11 +95,19 @@ export class MyBlogActions {
         };
     }
 
-    public static AddBlog(payload: Blog): MyAction<Blog> {
-        return {
+    public static AddBlog(payload: Blog, dispatch: Function): MyAction<Blog> {
+        const action = {
             type: BlogActionsTypes.AddBlog,
             payload: payload
         };
+        BlogService.addBlog(payload)
+            .then((blog: Blog) => {
+                dispatch(MyBlogActions.AddBlogSuccess(blog));
+            })
+            .catch((err) => {
+                dispatch(MyBlogActions.AddBlogFail(err.toString()));
+            });
+        return action;
     }
 
     public static AddBlogSuccess(payload: Blog): MyAction<Blog> {
@@ -97,11 +124,19 @@ export class MyBlogActions {
         };
     }
 
-    public static UpdateBlog(payload: Blog): MyAction<Blog> {
-        return {
+    public static UpdateBlog(payload: Blog, dispatch: Function): MyAction<Blog> {
+        const action = {
             type: BlogActionsTypes.UpdateBlog,
             payload: payload
         };
+        BlogService.updateBlog(payload)
+            .then((blog: Blog) => {
+                dispatch(MyBlogActions.UpdateBlogSuccess(blog));
+            })
+            .catch((err) => {
+                dispatch(MyBlogActions.UpdateBlogFail(err.toString()));
+            });
+        return action;
     }
 
     public static UpdateBlogSuccess(payload: Blog): MyAction<Blog> {
@@ -118,11 +153,20 @@ export class MyBlogActions {
         };
     }
 
-    public static LoadBlog(payload: string):  MyAction<string> {
-        return {
+    public static LoadBlog(payload: string, dispatch: Function): MyAction<string> {
+        const action = {
             type: BlogActionsTypes.LoadBlog,
             payload: payload
         };
+        BlogService.getAllBLog()
+            .then(((blogs: Blog[]) => {
+                dispatch(MyBlogActions.LoadBlogSuccess(blogs));
+            }))
+            .catch(err => {
+                dispatch(MyBlogActions.LoadBlogFail(err.toString()));
+            });
+
+        return action;
     }
 
     public static LoadBlogSuccess(payload: Blog[]): MyAction<Blog[]> {
@@ -139,11 +183,19 @@ export class MyBlogActions {
         };
     }
 
-    public static DeleteBlog(payload: string): MyAction<string> {
-        return {
+    public static DeleteBlog(payload: string, dispatch: Function): MyAction<string> {
+        const action = {
             type: BlogActionsTypes.DeleteBlog,
             payload: payload
         };
+        BlogService.deleteBlog(payload)
+            .then((id: string) => {
+                dispatch(MyBlogActions.DeleteBlogSuccess(id));
+            })
+            .catch((err) => {
+                dispatch(MyBlogActions.DeleteBlogFail(err.toString()));
+            });
+        return action;
     }
 
     public static DeleteBlogSuccess(payload: string): MyAction<string> {

@@ -1,4 +1,5 @@
 import {MyAction, User} from "../../interface";
+import {UserService} from "../../service";
 
 export enum UserActionsTypes {
     // Get user
@@ -9,11 +10,19 @@ export enum UserActionsTypes {
 
 export class MyUserActions {
 
-    public static GetUser(payload: string): MyAction<string> {
-        return {
+    public static GetUser(payload: string, dispatch: Function): MyAction<string> {
+        const action = {
             type: UserActionsTypes.GetUser,
             payload: payload,
         };
+        UserService.getUser()
+            .then((user: User) => {
+                dispatch(MyUserActions.GetUserSuccess(user));
+            })
+            .catch((err) => {
+                dispatch(MyUserActions.GetUserFail(err.toString()));
+            });
+        return action;
     }
 
     public static GetUserSuccess(payload: User): MyAction<User> {
