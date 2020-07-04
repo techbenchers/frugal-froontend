@@ -1,7 +1,6 @@
 import {Blog} from "../interface";
 import {HttpServiceUtil} from "./HttpServiceUtil";
 import * as faker from 'faker';
-import {store} from "../index";
 
 async function generateBlog(): Promise<Blog> {
     const title: string = faker.random.words();
