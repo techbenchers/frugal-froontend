@@ -1,7 +1,7 @@
 import React from 'react';
 import {BlogCard} from "../BlogCard";
-import {connect} from 'react-redux'
-import {MyBlogActions, MyUserActions} from "../../store/actions";
+import {connect, DispatchProp} from 'react-redux'
+import {MyBlogActions} from "../../store/actions";
 import {Blog, StoreState} from '../../interface';
 import {DateTime} from "luxon";
 import {CircularLoader} from "../CircularLoader";
@@ -9,8 +9,7 @@ import {DeltaToHTML} from '../Editor';
 import './BlogListContainer.scss';
 import {Box} from '@material-ui/core';
 
-export interface BlogListContainerProps {
-    dispatch: (e: any) => void;
+export interface BlogListContainerProps extends DispatchProp {
     blogs: Blog[];
     isLoading: boolean;
 }
@@ -21,9 +20,15 @@ export interface BlogListContainerState {
 
 class BlogListContainer extends React.PureComponent<BlogListContainerProps, BlogListContainerState> {
 
+    fetchData = () => {
+        if (this.props.blogs.length === 0) {
+            this.props.dispatch(MyBlogActions.LoadBlog("", this.props.dispatch));
+        }
+    };
+
+
     componentDidMount() {
-        this.props.dispatch(MyBlogActions.LoadBlog("", this.props.dispatch));
-        this.props.dispatch(MyUserActions.GetUser("", this.props.dispatch));
+        this.fetchData();
     }
 
     getCreatedDate(isoDate: string): string {

@@ -1,13 +1,14 @@
 import React from 'react';
 import {RouteComponentProps, withRouter} from "react-router";
-import {connect} from 'react-redux'
+import {connect, DispatchProp} from 'react-redux'
 import {Blog, StoreState} from '../../interface';
 import {CircularLoader} from "../CircularLoader";
 import './BlogView.scss';
+import {MyBlogActions} from "../../store/actions";
 
 const Editor = React.lazy(() => import('../Editor'));
 
-export interface BlogViewProps extends RouteComponentProps {
+export interface BlogViewProps extends RouteComponentProps, Partial<DispatchProp> {
     blog?: Blog;
     isLoading?: boolean;
 }
@@ -18,11 +19,15 @@ export interface BlogViewState {
 
 class BlogView extends React.PureComponent<BlogViewProps, BlogViewState> {
 
-    UNSAFE_componentWillMount() {
-    }
+    fetchData = () => {
+        if (!this.props.blog) {
+            this.props.dispatch(MyBlogActions.LoadBlog('', this.props.dispatch));
+        }
+    };
 
     componentDidMount() {
         window.scrollTo(0, 0);
+        this.fetchData();
     }
 
     render() {

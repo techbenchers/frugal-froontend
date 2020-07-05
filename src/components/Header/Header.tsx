@@ -64,7 +64,7 @@ class Header extends React.PureComponent<HeaderProps, HeaderState> {
                         </Typography>
                         <InputBase className="search" placeholder="Search"/>
                         {!user && <LoginButton/>}
-                        {!!user && <this.UserProfile/>}
+                        {!!user && this.UserProfile()}
                     </Toolbar>
                 </AppBar>
             </>
