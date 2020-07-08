@@ -41,8 +41,9 @@ export class MyBlogActions {
             payload: payload
         };
         BlogService.getBlog(payload)
-            .then((blog: Blog) => {
-                dispatch(MyBlogActions.GetBlogSuccess(blog));
+            .then((blog: any) => {
+                // Todo: change any to Blog, and blog[0] to blog
+                dispatch(MyBlogActions.GetBlogSuccess(blog[0]));
             })
             .catch((err) => {
                 dispatch(MyBlogActions.GetBlogFail(err.toString()));

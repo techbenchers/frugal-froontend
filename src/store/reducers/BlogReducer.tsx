@@ -1,5 +1,5 @@
-import {BlogActionsTypes} from "../actions";
-import {Blog, BlogState, MyAction} from "../../interface";
+import { BlogActionsTypes } from "../actions";
+import { Blog, BlogState, MyAction } from "../../interface";
 
 
 const initState: BlogState = {
@@ -34,7 +34,7 @@ export const BlogReducer = (state: BlogState = initState, action: MyAction<any>)
             delete state.blogs[action.payload];
             return {
                 isLoading: false,
-                blogs: {...state.blogs}
+                blogs: { ...state.blogs }
             };
         case BlogActionsTypes.LoadBlogSuccess:
             let tempState = state;
@@ -46,7 +46,7 @@ export const BlogReducer = (state: BlogState = initState, action: MyAction<any>)
             });
             return {
                 isLoading: false,
-                blogs: {...tempState.blogs}
+                blogs: { ...tempState.blogs }
             };
         default:
             return state;

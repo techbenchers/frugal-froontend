@@ -1,0 +1,4 @@
+{
+  "/blog/all": "/blog",
+  "/blog/:id": "/blog?uri=:id"
+}

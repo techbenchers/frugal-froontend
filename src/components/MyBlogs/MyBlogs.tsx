@@ -1,26 +1,28 @@
 import React from 'react';
-import { BlogCard } from "../BlogCard";
-import { connect, DispatchProp } from 'react-redux'
-import { MyBlogActions } from "../../store/actions";
-import { Blog, StoreState } from '../../interface';
-import { DateTime } from "luxon";
-import { CircularLoader } from "../CircularLoader";
-import { DeltaToHTML } from '../Editor';
-import './BlogListContainer.scss';
+import { connect, DispatchProp } from 'react-redux';
+import { Blog, StoreState, User } from '../../interface';
 import { Box } from '@material-ui/core';
+import { CircularLoader } from "../CircularLoader";
+import { DateTime } from "luxon";
+import { BlogCard } from "../BlogCard";
+import { DeltaToHTML } from '../Editor';
+import { MyBlogActions } from "../../store/actions";
+import './MyBlogs.scss';
 
-export interface BlogListContainerProps extends DispatchProp {
-    blogs: Blog[];
-    isLoading: boolean;
+
+export interface MyBlogsProps extends DispatchProp {
+    blogs?: Blog[];
+    isLoading?: boolean;
+    user?: User;
 }
 
-export interface BlogListContainerState {
+export interface MyBlogsState {
 
 }
 
-class BlogListContainer extends React.Component<BlogListContainerProps, BlogListContainerState> {
+class MyBlogs extends React.Component<MyBlogsProps, MyBlogsState> {
 
-    shouldComponentUpdate(nextProps: BlogListContainerProps) {
+    shouldComponentUpdate(nextProps: MyBlogsProps) {
         return JSON.stringify(nextProps.blogs) !== JSON.stringify(this.props.blogs);
     }
 
@@ -28,18 +30,17 @@ class BlogListContainer extends React.Component<BlogListContainerProps, BlogList
         this.props.dispatch(MyBlogActions.LoadBlog("", this.props.dispatch));
     };
 
-
     componentDidMount() {
         this.fetchData();
-    }
-
-    getCreatedDate(isoDate: string): string {
-        return DateTime.fromISO(isoDate).toFormat("LLL dd, yyyy");
     }
 
     getShortBlog = (deltaString: string): string => {
         return DeltaToHTML.deltoToHTML(JSON.parse(deltaString)).substr(0, 200) + '...';
     };
+
+    getCreatedDate(isoDate: string): string {
+        return DateTime.fromISO(isoDate).toFormat("LLL dd, yyyy");
+    }
 
     render() {
         const { isLoading } = this.props;
@@ -66,7 +67,7 @@ class BlogListContainer extends React.Component<BlogListContainerProps, BlogList
                             title={blog.title}
                             uri={blog.uri as string}
                             alt={blog.title as string}
-                            author={"Suyash Deshpande"}
+                            author={this.props.user.name || ''}
                             body={this.getShortBlog(blog.body)}
                             img={blog.titleImage}
                             date={this.getCreatedDate(blog.createdAt as string)} />
@@ -78,9 +79,11 @@ class BlogListContainer extends React.Component<BlogListContainerProps, BlogList
 }
 
 const mapStateToProps = (state: StoreState) => {
-    let blogs: Blog[] = Object.values<Blog>(state.blogState.blogs);
-    let isLoading: boolean = state.blogState.isLoading;
-    return { blogs: blogs, isLoading: isLoading };
-};
+    const blogs: Blog[] = Object.values<Blog>(state.blogState.blogs);
+    const user: User = Object.values<User>(state.userState.user)[0];
+    let filteredBlogs: Blog[] = blogs.filter((blog: Blog) => user.blogIds.includes(blog.id));
+    return { blogs: filteredBlogs, user };
+}
 
-export default connect(mapStateToProps)(BlogListContainer);
+
+export default connect(mapStateToProps)(MyBlogs);

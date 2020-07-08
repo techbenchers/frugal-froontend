@@ -6,8 +6,10 @@ import {
     Button
 } from '@material-ui/core';
 import './Menu.scss';
+import { RouteComponentProps, withRouter } from "react-router";
 
-export interface MenuProps {
+
+export interface MenuProps extends RouteComponentProps {
     options: any[];
     handleClose?: () => void;
     handleOpen?: () => void;
@@ -17,7 +19,7 @@ export interface MenuState {
     anchorEl: HTMLElement | null;
 }
 
-export class Menu extends React.PureComponent<MenuProps, MenuState> {
+class Menu extends React.PureComponent<MenuProps, MenuState> {
 
     constructor(props: MenuProps) {
         super(props);
@@ -26,7 +28,8 @@ export class Menu extends React.PureComponent<MenuProps, MenuState> {
         }
     }
 
-    handleClose = () => {
+    handleClose = (option: any) => {
+        this.props.history.push(option.link);
         this.setState({ anchorEl: null });
     };
 
@@ -61,7 +64,7 @@ export class Menu extends React.PureComponent<MenuProps, MenuState> {
                 >
                     {options.map((o: any) => {
                         return (
-                            <MenuItem key={o.label.toLowerCase()} onClick={this.handleClose}>{o.label}</MenuItem>
+                            <MenuItem key={o.label.toLowerCase()} onClick={() => this.handleClose(o)}>{o.label}</MenuItem>
                         )
                     })}
                 </MaterialMenu>
@@ -70,3 +73,5 @@ export class Menu extends React.PureComponent<MenuProps, MenuState> {
     }
 
 }
+
+export default withRouter(Menu);

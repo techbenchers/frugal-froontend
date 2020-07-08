@@ -1,13 +1,15 @@
 import React from 'react';
 import {RouteComponentProps, withRouter} from "react-router";
-import {connect} from 'react-redux'
+import {connect, DispatchProp} from 'react-redux'
 import './BlogAddUpdate.scss';
 import {Blog, StoreState} from '../../interface';
+import {CircularLoader} from "../CircularLoader";
+import {MyBlogActions} from "../../store/actions";
 
 const FrugalEditor = React.lazy(() => import('../Editor'));
 
-export interface BlogAddUpdateProps extends RouteComponentProps {
-  data?: any;
+export interface BlogAddUpdateProps extends RouteComponentProps, Partial<DispatchProp> {
+    blog?: Blog;
 }
 
 export interface BlogAddUpdateState {
@@ -23,22 +25,38 @@ class BlogAddUpdate extends React.Component<BlogAddUpdateProps, BlogAddUpdateSta
         }
     }
 
+    fetchData = () => {
+        if (!this.props.blog) {
+            let location = this.props.location;
+            if (location.pathname.includes('edit')) {
+                const uri = (this.props.match.params as any).id;
+                this.props.dispatch(MyBlogActions.GetBlog(uri, this.props.dispatch));
+            }
+        }
+    };
+
     componentDidMount(): void {
         this.verifyEditOrAdd();
+        this.fetchData();
     }
 
     verifyEditOrAdd = () => {
         let location = this.props.location;
         if (location.pathname.includes('edit')) {
-            let blogUri: string = (this.props.match.params as any).id;
-            console.log('behaving as edit component', blogUri);
+            // const blogUri: string = (this.props.match.params as any).id;
             this.setState({edit: true});
         }
     };
 
     render() {
         const {edit} = this.state;
-        const data = edit ? this.props.data : {};
+        const {blog} = this.props;
+        if (edit && !blog) {
+            return (
+                <CircularLoader/>
+            )
+        }
+        const data = edit ? JSON.parse(blog.body) : {};
         return (
             <div className="blog-edit-container">
                 <FrugalEditor data={data}/>
@@ -48,14 +66,13 @@ class BlogAddUpdate extends React.Component<BlogAddUpdateProps, BlogAddUpdateSta
 }
 
 const mapStateToProps = (state: StoreState, props: BlogAddUpdateProps) => {
-    let data = {};
+    let blog: Blog;
     let location = props.location;
-    if(location.pathname.includes('edit')) {
-      const uri: string = (props.match.params as any).id;
-      let blog: Blog = Object.values(state.blogState.blogs).find((b: Blog) => b.uri === uri) as Blog;
-      data = JSON.parse(blog.body);
+    if (location.pathname.includes('edit')) {
+        const uri: string = (props.match.params as any).id;
+        blog = Object.values(state.blogState.blogs).find((b: Blog) => b.uri === uri) as Blog;
     }
-    return {data};
+    return {blog};
 };
 
 export default withRouter(connect(mapStateToProps)(BlogAddUpdate));
