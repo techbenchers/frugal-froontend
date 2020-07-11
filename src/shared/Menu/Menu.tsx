@@ -3,14 +3,22 @@ import {
     Menu as MaterialMenu,
     MenuItem,
     Avatar,
-    Button
+    Button,
 } from '@material-ui/core';
+
+
 import './Menu.scss';
-import { RouteComponentProps, withRouter } from "react-router";
+import {RouteComponentProps, withRouter} from "react-router";
+
+export interface MenuOptions {
+    label: string;
+    link: string;
+    icon?: any;
+}
 
 
 export interface MenuProps extends RouteComponentProps {
-    options: any[];
+    options: MenuOptions[];
     handleClose?: () => void;
     handleOpen?: () => void;
 }
@@ -30,17 +38,17 @@ class Menu extends React.PureComponent<MenuProps, MenuState> {
 
     handleClose = (option: any) => {
         this.props.history.push(option.link);
-        this.setState({ anchorEl: null });
+        this.setState({anchorEl: null});
     };
 
     handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-        this.setState({ anchorEl: event.currentTarget });
+        this.setState({anchorEl: event.currentTarget});
     };
 
 
     render() {
-        const { anchorEl } = this.state;
-        const { options } = this.props;
+        const {anchorEl} = this.state;
+        const {options} = this.props;
         return (
             <>
                 <Button aria-controls="simple-menu" aria-haspopup="true" onClick={this.handleClick}>
@@ -62,9 +70,12 @@ class Menu extends React.PureComponent<MenuProps, MenuState> {
                         horizontal: 'center',
                     }}
                 >
-                    {options.map((o: any) => {
+                    {options.map((o: MenuOptions) => {
                         return (
-                            <MenuItem key={o.label.toLowerCase()} onClick={() => this.handleClose(o)}>{o.label}</MenuItem>
+                            <MenuItem key={o.label.toLowerCase()}
+                                      onClick={() => this.handleClose(o)}>
+                                {o.icon}{o.label}
+                            </MenuItem>
                         )
                     })}
                 </MaterialMenu>

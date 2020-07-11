@@ -2,7 +2,7 @@ import React from 'react';
 import { RouteComponentProps, withRouter } from "react-router";
 import { connect, DispatchProp } from 'react-redux'
 import { Blog, StoreState, User } from '../../interface';
-import { CircularLoader } from "../CircularLoader";
+import { CircularLoader } from "../../shared/CircularLoader";
 import './BlogView.scss';
 import { MyBlogActions } from "../../store/actions";
 import { Fab } from '@material-ui/core';
@@ -11,7 +11,7 @@ import EditIcon from '@material-ui/icons/Edit';
 
 
 
-const Editor = React.lazy(() => import('../Editor'));
+const Editor = React.lazy(() => import('../../shared/Editor'));
 
 export interface BlogViewProps extends RouteComponentProps, Partial<DispatchProp> {
     blog?: Blog;

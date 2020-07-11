@@ -3,10 +3,9 @@ import {RouteComponentProps, withRouter} from "react-router";
 import {connect, DispatchProp} from 'react-redux'
 import './BlogAddUpdate.scss';
 import {Blog, StoreState} from '../../interface';
-import {CircularLoader} from "../CircularLoader";
+import {CircularLoader} from "../../shared/CircularLoader";
 import {MyBlogActions} from "../../store/actions";
-
-const FrugalEditor = React.lazy(() => import('../Editor'));
+import FrugalEditor from '../../shared/Editor';
 
 export interface BlogAddUpdateProps extends RouteComponentProps, Partial<DispatchProp> {
     blog?: Blog;
@@ -36,8 +35,8 @@ class BlogAddUpdate extends React.Component<BlogAddUpdateProps, BlogAddUpdateSta
     };
 
     componentDidMount(): void {
-        this.verifyEditOrAdd();
         this.fetchData();
+        this.verifyEditOrAdd();
     }
 
     verifyEditOrAdd = () => {

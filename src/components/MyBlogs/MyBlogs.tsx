@@ -1,13 +1,11 @@
 import React from 'react';
-import { connect, DispatchProp } from 'react-redux';
-import { Blog, StoreState, User } from '../../interface';
-import { Box } from '@material-ui/core';
-import { CircularLoader } from "../CircularLoader";
-import { DateTime } from "luxon";
-import { BlogCard } from "../BlogCard";
-import { DeltaToHTML } from '../Editor';
-import { MyBlogActions } from "../../store/actions";
+import {connect, DispatchProp} from 'react-redux';
+import {Blog, StoreState, User} from '../../interface';
+import {Box} from '@material-ui/core';
+import {CircularLoader} from "../../shared/CircularLoader";
+import {MyBlogActions} from "../../store/actions";
 import './MyBlogs.scss';
+import BlogList from "../../shared/BlogList";
 
 
 export interface MyBlogsProps extends DispatchProp {
@@ -34,45 +32,25 @@ class MyBlogs extends React.Component<MyBlogsProps, MyBlogsState> {
         this.fetchData();
     }
 
-    getShortBlog = (deltaString: string): string => {
-        return DeltaToHTML.deltoToHTML(JSON.parse(deltaString)).substr(0, 200) + '...';
-    };
-
-    getCreatedDate(isoDate: string): string {
-        return DateTime.fromISO(isoDate).toFormat("LLL dd, yyyy");
-    }
-
     render() {
-        const { isLoading } = this.props;
-        const { blogs } = this.props;
+        const {isLoading} = this.props;
+        const {blogs} = this.props;
         if (isLoading) {
-            return <CircularLoader />
+            return <CircularLoader/>
         }
         if (!blogs.length) {
             return (
                 <Box display="flex"
-                    justifyContent="center"
-                    alignItems="center"
-                    height={1}>
+                     justifyContent="center"
+                     alignItems="center"
+                     height={1}>
                     No Blogs
                 </Box>
             );
         }
         return (
             <>
-                {
-                    blogs.map((blog: Blog) => (
-                        <BlogCard
-                            key={blog.id || ''}
-                            title={blog.title}
-                            uri={blog.uri as string}
-                            alt={blog.title as string}
-                            author={this.props.user.name || ''}
-                            body={this.getShortBlog(blog.body)}
-                            img={blog.titleImage}
-                            date={this.getCreatedDate(blog.createdAt as string)} />
-                    ))
-                }
+                <BlogList blogs={blogs}/>
             </>
         );
     }
@@ -82,8 +60,8 @@ const mapStateToProps = (state: StoreState) => {
     const blogs: Blog[] = Object.values<Blog>(state.blogState.blogs);
     const user: User = Object.values<User>(state.userState.user)[0];
     let filteredBlogs: Blog[] = blogs.filter((blog: Blog) => user.blogIds.includes(blog.id));
-    return { blogs: filteredBlogs, user };
-}
+    return {blogs: filteredBlogs, user};
+};
 
 
 export default connect(mapStateToProps)(MyBlogs);

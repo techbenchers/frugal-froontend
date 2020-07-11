@@ -7,24 +7,17 @@ import {combineReducers, createStore} from "redux";
 import {BlogReducer, UserReducer} from "./store/reducers";
 import {Provider} from "react-redux";
 import {composeWithDevTools} from 'redux-devtools-extension';
-import {createMuiTheme, responsiveFontSizes, ThemeProvider} from '@material-ui/core/styles';
 import './index.scss';
 
+const rootReducer = combineReducers({blogState: BlogReducer, userState: UserReducer});
 
-let theme = createMuiTheme();
-theme = responsiveFontSizes(theme);
-
-let rootReducer = combineReducers({blogState: BlogReducer, userState: UserReducer});
-
-export const store = createStore(rootReducer, composeWithDevTools());
+const store = createStore(rootReducer, composeWithDevTools());
 
 
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
-            <ThemeProvider theme={theme}>
-                <App/>
-            </ThemeProvider>
+            <App/>
         </BrowserRouter>
     </Provider>,
     document.getElementById('root')

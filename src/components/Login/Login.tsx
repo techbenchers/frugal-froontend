@@ -1,6 +1,6 @@
 import React from 'react';
 import {Button, Link} from "@material-ui/core";
-import {Dialog} from "../Dialog";
+import {Dialog} from "../../shared/Dialog";
 import google from '../../static/images/logo/google.png';
 import github from '../../static/images/logo/github.png';
 import {RouteComponentProps, withRouter} from "react-router";
