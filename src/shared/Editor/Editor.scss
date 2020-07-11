@@ -7,6 +7,19 @@
 #editor-content {
   overflow-y: auto;
   border: none;
+
+
+  @media only screen and (max-width: 599px) {
+    p {
+      margin-top: 1rem;
+      font-size: 18px;
+
+      &:nth-child(1) {
+        margin-top: 0;
+      }
+    }
+  }
+
 }
 
 .ql-toolbar {
@@ -25,3 +38,4 @@
   color: rgba(0, 0, 0, 0.84);
   word-break: break-word;
 }
+
