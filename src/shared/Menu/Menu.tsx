@@ -5,6 +5,7 @@ import {
     Avatar,
     Button,
 } from '@material-ui/core';
+import './Menu.scss';
 
 
 import './Menu.scss';
@@ -52,7 +53,7 @@ class Menu extends React.PureComponent<MenuProps, MenuState> {
         return (
             <>
                 <Button aria-controls="simple-menu" aria-haspopup="true" onClick={this.handleClick}>
-                    <Avatar>GK</Avatar>
+                    <Avatar className="avatar">GK</Avatar>
                 </Button>
                 <MaterialMenu
                     id="simple-menu"

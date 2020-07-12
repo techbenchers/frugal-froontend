@@ -47,7 +47,7 @@ class BlogView extends React.PureComponent<BlogViewProps, BlogViewState> {
             <>
                 <Editor readonly={true} data={body} />
                 {
-                    this.props.user.blogIds.includes(blog.id) &&
+                    this.props.user?.blogIds.includes(blog.id) &&
                     <Link to={this.props.location.pathname + '/edit'}>
                         <Fab className="edit-post">
                             <EditIcon />

@@ -1,0 +1,42 @@
+@import "src/styles/color";
+
+.profile-container {
+  display: flex;
+  flex-direction: column;
+
+  .my-blogs {
+    flex-grow: 1;
+    overflow-y: auto;
+  }
+}
+
+.profile {
+  flex-wrap: wrap-reverse;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: flex;
+  padding-top: 20px;
+
+  h2 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  button {
+    margin-left: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    @media only screen and (max-width: 599px) {
+      font-size: 0.6rem;
+      padding: 6px 6px;
+    }
+  }
+
+  .profile-avatar {
+    background: $dull-black;
+    height: 128px;
+    width: 128px;
+    font-size: 3rem;
+  }
+}
+
